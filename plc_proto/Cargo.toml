@@ -1,0 +1,9 @@
+[package]
+name = "plc_proto"
+version = "2024.9.26"
+edition = "2021"
+
+[dependencies]
+
+[build-dependencies]
+tonic-build = { version = "0.11.0", features = ["prost"] }
