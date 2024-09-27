@@ -4,6 +4,7 @@ version = "2024.9.26"
 edition = "2021"
 
 [dependencies]
+bit-struct = { version = "0.3.2" }
 
 [build-dependencies]
 tonic-build = { version = "0.11.0", features = ["prost"] }

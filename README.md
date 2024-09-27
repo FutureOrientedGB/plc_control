@@ -1,12 +1,8 @@
 # 1. Sequence Diagrams
 
 ```mermaid
-graph TD;
-    client-exe
-    service-exe
-    adapter-exe
-    operator-lib
-    plc-exe
+graph LR;
+    client--rpc+exe-->service--rpc+exe-->adapter--lib-->operator--modbus+exe-->plc
 ```
 
 ## 1.1. register

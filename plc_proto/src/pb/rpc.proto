@@ -5,9 +5,8 @@ package plc;
 
 // keep dictionary order
 import "request_response/control_plc.proto";
-import "request_response/keep_alive_plc.proto";
 import "request_response/query_plc_data.proto";
-import "request_response/query_plc_meata.proto";
+import "request_response/query_plc_meta.proto";
 import "request_response/register_plc.proto";
 
 
@@ -21,6 +20,12 @@ service PlcService {
     rpc query_plc_devices(QueryPlcDevicesRequest) returns (QueryPlcDevicesResponse) {}
 
     // from plc_client
+    rpc control_plc(ControlPlcRequest) returns (ControlPlcResponse) {}
+    rpc query_plc(QueryPlcRequest) returns (QueryPlcResponse) {}
+}
+
+service PlcAdapter {
+    // from plc_adapter
     rpc control_plc(ControlPlcRequest) returns (ControlPlcResponse) {}
     rpc query_plc(QueryPlcRequest) returns (QueryPlcResponse) {}
 }
