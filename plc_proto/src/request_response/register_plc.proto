@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_info.proto";
+import "type/response_status.proto";
+
+
+enum RegisterPlcVersion {
+    init_ea5a12b_20240927 = 0;
+}
+
+message RegisterPlcRequest {
+    RegisterPlcVersion version = 1;
+    PlcDeviceInfo info = 2;
+}
+
+message RegisterPlcResponse {
+    message Version {
+        RegisterPlcVersion request = 1;
+        RegisterPlcVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+}

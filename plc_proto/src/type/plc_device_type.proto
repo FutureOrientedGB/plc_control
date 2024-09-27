@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package plc;
+
+
+
+enum PlcDeviceTypeId {
+    foo = 0;
+    bar = 1;
+}
+
+message DeviceType {
+    PlcDeviceTypeId id = 1; // unique type id
+    string name = 2;  // unique type id string literal
+}

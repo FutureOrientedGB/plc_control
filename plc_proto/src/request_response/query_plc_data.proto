@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_info.proto";
+import "type/response_status.proto";
+
+
+enum QueryPlcVersion {
+    init_d0bb8fb_20240927 = 0;
+}
+
+message QueryPlcRequest {
+    QueryPlcVersion version = 1;
+    PlcDeviceInfo plc_info = 2;
+}
+
+message QueryPlcResponse {
+    message Version {
+        QueryPlcVersion request = 1;
+        QueryPlcVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+    PlcDeviceInfo plc_info = 3;
+}

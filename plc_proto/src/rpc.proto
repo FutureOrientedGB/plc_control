@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package plc;
+
+
+// keep dictionary order
+import "request_response/control_plc.proto";
+import "request_response/keep_alive_plc.proto";
+import "request_response/query_plc_data.proto";
+import "request_response/query_plc_meata.proto";
+import "request_response/register_plc.proto";
+
+
+service PlcService {
+    // from plc_adapter
+    rpc register_plc(RegisterPlcRequest) returns (RegisterPlcResponse) {}
+
+    // from plc_client
+    rpc query_plc_types(QueryPlcTypesRequest) returns (QueryPlcTypesResponse) {}
+    rpc query_plc_schema(QueryPlcSchemaRequest) returns (QueryPlcSchemaResponse) {}
+    rpc query_plc_devices(QueryPlcDevicesRequest) returns (QueryPlcDevicesResponse) {}
+
+    // from plc_client
+    rpc control_plc(ControlPlcRequest) returns (ControlPlcResponse) {}
+    rpc query_plc(QueryPlcRequest) returns (QueryPlcResponse) {}
+}

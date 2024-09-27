@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package plc;
+
+
+// 车道指示器
+enum LaneIndicatorStatus64c93c4 {
+    no_mans_land_64c93c4 = 0;
+    allow_forward_64c93c4 = 1;
+    forbidden_64c93c4 = 2;
+    allow_reverse_64c93c4 = 3;
+}
+
+message LaneIndicator64c93c4 {
+    LaneIndicatorStatus64c93c4 status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 交通信号灯
+enum TrafficLightStatus10a878a {
+    no_mans_land_10a878a = 0;
+    red_10a878a = 1;
+    green_10a878a = 2;
+    yellow_10a878a = 3;
+}
+
+message TrafficLight10a878a {
+    TrafficLightStatus10a878a status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 风机
+enum BlowerStatusfe98b8c {
+    no_mans_land_fe98b8c = 0;
+    stop_fe98b8c = 1;
+    forward_fe98b8c = 2;
+    reverse_fe98b8c = 3;
+}
+
+message Blowerfe98b8c {
+    BlowerStatusfe98b8c status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 卷帘门
+enum RollingDoorStatus071cc14 {
+    no_mans_land_071cc14 = 0;
+    stop_071cc14 = 1;
+    up_071cc14 = 2;
+    down_071cc14 = 3;
+    reset_071cc14 = 4;
+}
+
+message RollingDoor071cc14 {
+    RollingDoorStatus071cc14 status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 照明
+enum LedStatusbcf8f78 {
+    no_mans_land_bcf8f78 = 0;
+    open_bcf8f78 = 1;
+    close_bcf8f78 = 2;
+}
+
+message Ledbcf8f78 {
+    LedStatusbcf8f78 status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 水泵
+enum WaterPumpStatus43ddc7a {
+    no_mans_43ddc7a = 0;
+    on_43ddc7a = 1;
+    off_43ddc7a = 2;
+}
+
+message WaterPump43ddc7a {
+    WaterPumpStatus43ddc7a status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+// 风向
+enum WindDirectionf9ed540 {
+    no_mans_land_f9ed540 = 0;
+    forward = 1;
+    reverse = 2;
+}
+
+message Windf9ed540 {
+    WindDirectionf9ed540 status = 1;
+    string name = 2;
+    uint32 registers = 3;
+}
+
+message FooTypePlcSchema {
+    repeated LaneIndicator64c93c4 lane_indicator = 1;  // 车指
+    repeated TrafficLight10a878a traffic_light = 2;  // 红绿灯
+    repeated Blowerfe98b8c blower = 3;  // 风机
+    repeated RollingDoor071cc14 rolling_door = 4;  // 卷帘门
+    repeated Ledbcf8f78 led = 5;  // 照明
+    repeated WaterPump43ddc7a water_pump = 6;  // 水泵
+    repeated Windf9ed540 wind_direction = 7;  // 风向
+    repeated uint32 co = 8;  // 一氧化碳
+    repeated uint32 vi = 9;  // 有害气体
+    repeated uint32 no2 = 10;  // 二氧化氮
+    repeated uint32 wind_speed = 11;  // 风速
+    repeated uint32 illuminance = 12;  // 照度
+    repeated uint32 light_intensity = 13;  // 光强
+    repeated uint32 liquid_level = 14;  // 液位
+}

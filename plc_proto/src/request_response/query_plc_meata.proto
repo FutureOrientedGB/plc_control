@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_info.proto";
+import "type/plc_device_type.proto";
+import "type/response_status.proto";
+
+
+enum QueryPlcTypesVersion {
+    init_d699c21_20240927 = 0;
+}
+
+message QueryPlcTypesRequest {
+    QueryPlcTypesVersion version = 1;
+}
+
+message QueryPlcTypesResponse {
+    message Version {
+        QueryPlcTypesVersion request = 1;
+        QueryPlcTypesVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+    repeated DeviceType plc_types = 3;
+}
+
+enum QueryPlcSchemaVersion {
+    init_dd141e3_20240927 = 0;
+}
+
+message QueryPlcSchemaRequest {
+    QueryPlcSchemaVersion version = 1;
+    DeviceType plc_type = 2;
+}
+
+message QueryPlcSchemaResponse {
+    message Version {
+        QueryPlcSchemaVersion request = 1;
+        QueryPlcSchemaVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+    DeviceType plc_type = 3;
+    PlcDeviceInfo plc_info = 4;
+}
+
+enum QueryPlcDevicesVersion {
+    init_e32d880_20240927 = 0;
+}
+
+message QueryPlcDevicesRequest {
+    QueryPlcDevicesVersion version = 1;
+}
+
+message QueryPlcDevicesResponse {
+    message Version {
+        QueryPlcDevicesVersion request = 1;
+        QueryPlcDevicesVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+    repeated PlcDeviceInfo plc_devices = 3;
+}

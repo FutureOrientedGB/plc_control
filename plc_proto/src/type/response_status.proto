@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package plc;
+
+
+
+enum ResponseCode {
+    // success
+    ok = 0;
+
+    // client errors [10000, 199999]
+
+    // service errors [20000, 29999]
+
+    // adapter errors [30000, 39999]
+
+    // operator errors [40000, 49999]
+
+    // plc errors [50000, 59999]
+    plc_not_found_error = 50000;
+    plc_offline_error = 50001;
+    plc_control_not_supported_error = 50002;
+    plc_device_error = 50003;
+    plc_logic_error = 50004;
+}
+
+message ResponseStatus {
+    ResponseCode code = 1; // unique id
+    string name = 2;  // unique id string literal
+    string message = 3;  // details
+}
