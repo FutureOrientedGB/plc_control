@@ -4,7 +4,21 @@ version = "2024.9.26"
 edition = "2021"
 
 [dependencies]
-bit-struct = { version = "0.3.2" }
+bitfield-struct = { version = "0.9.0" }
+
+prost = { version = "0.13.3" }
+prost-types = { version = "0.13.3" }
+
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = { version = "1.0.128" }
+
+strum = { version = "0.26.3" }
+strum_macros = { version = "0.26.3" }
+
+tonic = { version = "0.12.3" }
+tonic-reflection = { version = "0.12.3" }
+tonic-types = { version = "0.12.3" }
+
 
 [build-dependencies]
 tonic-build = { version = "0.11.0", features = ["prost"] }

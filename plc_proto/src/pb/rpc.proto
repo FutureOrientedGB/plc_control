@@ -4,10 +4,10 @@ package plc;
 
 
 // keep dictionary order
-import "request_response/control_plc.proto";
-import "request_response/query_plc_data.proto";
-import "request_response/query_plc_meta.proto";
-import "request_response/register_plc.proto";
+import "req_resp/control_plc.proto";
+import "req_resp/query_plc_data.proto";
+import "req_resp/query_plc_meta.proto";
+import "req_resp/register_plc.proto";
 
 
 service PlcService {

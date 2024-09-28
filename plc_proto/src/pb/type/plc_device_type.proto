@@ -3,7 +3,6 @@ syntax = "proto3";
 package plc;
 
 
-
 enum PlcDeviceTypeId {
     foo = 0;
     bar = 1;

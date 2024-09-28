@@ -3,52 +3,47 @@ syntax = "proto3";
 package plc;
 
 
-message BoolType {
-    string name = 1;
-    bool val = 2;
-}
-
-
 message EnumType {
-    message EnumValue {
-        string name = 1;
-        uint32 value = 2;
-    }
-    
-    string name = 1;
-    uint32 val = 2;
-    repeated EnumValue supports = 3;
+    uint32 address = 1;
+    string name = 2;
+    uint32 value = 3;
+    repeated string names = 4;
+    repeated uint32 values = 5;
 }
 
 
 message Uint32Type {
-    string name = 1;
-    uint32 val = 2;
-    uint32 max = 3;
-    uint32 min = 4;
+    uint32 address = 1;
+    string name = 2;
+    uint32 val = 3;
+    uint32 max = 4;
+    uint32 min = 5;
 }
 
 
 message Uint64Type {
-    string name = 1;
-    uint64 val = 2;
-    uint64 max = 3;
-    uint64 min = 4;
+    uint32 address = 1;
+    string name = 2;
+    uint64 val = 3;
+    uint64 max = 4;
+    uint64 min = 5;
 }
 
 
 message Float32Type {
-    string name = 1;
-    float val = 2;
-    float max = 3;
-    float min = 4;
+    uint32 address = 1;
+    string name = 2;
+    float val = 3;
+    float max = 4;
+    float min = 5;
 }
 
 
 message Float64Type {
-    string name = 1;
-    double val = 2;
-    double max = 3;
-    double min = 4;
+    uint32 address = 1;
+    string name = 2;
+    double val = 3;
+    double max = 4;
+    double min = 5;
 }
 

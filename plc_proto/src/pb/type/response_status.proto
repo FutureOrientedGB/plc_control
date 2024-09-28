@@ -3,7 +3,6 @@ syntax = "proto3";
 package plc;
 
 
-
 enum ResponseCode {
     // success
     ok = 0;
