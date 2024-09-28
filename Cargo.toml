@@ -6,4 +6,5 @@ members = [
     "plc_service",
     "plc_adapter",
     "plc_proto",
+    "plc_device",
 ]

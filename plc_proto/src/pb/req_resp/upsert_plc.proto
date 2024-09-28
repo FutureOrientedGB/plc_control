@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_info.proto";
+import "type/response_status.proto";
+
+
+enum UpsertPlcVersion {
+    init_95cbe17_20240928 = 0;
+}
+
+message UpsertPlcDeviceRequest {
+    UpsertPlcVersion version = 1;
+    PlcDeviceInfo info = 2;
+}
+
+message UpsertPlcDeviceResponse {
+    message Version {
+        UpsertPlcVersion request = 1;
+        UpsertPlcVersion min_required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+}

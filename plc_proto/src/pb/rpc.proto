@@ -8,6 +8,7 @@ import "req_resp/control_plc.proto";
 import "req_resp/query_plc_data.proto";
 import "req_resp/query_plc_meta.proto";
 import "req_resp/register_plc.proto";
+import "req_resp/upsert_plc.proto";
 
 
 service PlcService {
@@ -18,6 +19,7 @@ service PlcService {
     rpc query_plc_types(QueryPlcTypesRequest) returns (QueryPlcTypesResponse) {}
     rpc query_plc_schema(QueryPlcSchemaRequest) returns (QueryPlcSchemaResponse) {}
     rpc query_plc_devices(QueryPlcDevicesRequest) returns (QueryPlcDevicesResponse) {}
+    rpc upsert_plc_device(UpsertPlcDeviceRequest) returns (UpsertPlcDeviceResponse) {}
 
     // from plc_client
     rpc control_plc(ControlPlcRequest) returns (ControlPlcResponse) {}

@@ -772,7 +772,6 @@ checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 name = "plc_adapter"
 version = "2024.9.26"
 dependencies = [
- "plc_operator",
  "prost 0.12.6",
  "prost-types 0.12.6",
  "tonic 0.11.0",
@@ -795,15 +794,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "plc_operator"
-version = "2024.9.26"
-dependencies = [
- "plc_proto",
-]
+name = "plc_device"
+version = "2024.9.28"
 
 [[package]]
 name = "plc_proto"
-version = "2024.9.26"
+version = "2024.9.28"
 dependencies = [
  "bitfield-struct",
  "prost 0.13.3",

@@ -1,12 +1,10 @@
 # 1. Sequence Diagrams
-
 ```mermaid
 graph LR;
     client--rpc-->service--rpc-->adapter--modbus-->plc
 ```
 
 ## 1.1. register
-
 ```mermaid
 sequenceDiagram
     autonumber
@@ -42,13 +40,24 @@ sequenceDiagram
     participant client
     participant service
 
-client->>service: query_plc_devices (QueryPlcDevicesRequest)
+client->>service: query_plc_devices (UpsertPlcDeviceRequest)
 Note right of service: redis
-service-->>client: return (QueryPlcDevicesResponse)
+service-->>client: return (UpsertPlcDeviceResponse)
 ```
 
-## 1.4. control plc
+## 1.4. upsert device
+```mermaid
+sequenceDiagram
+    autonumber
+    participant client
+    participant service
 
+client->>service: upsert_plc_device (UpsertPlcDevicesRequest)
+Note right of service: redis
+service-->>client: return (UpsertPlcDevicesResponse)
+```
+
+## 1.5. control plc
 ```mermaid
 sequenceDiagram
     autonumber
@@ -66,8 +75,7 @@ adapter-->>service: return (ControlPlcResponse)
 service-->>client: return (ControlPlcResponse)
 ```
 
-## 1.4. query plc
-
+## 1.6. query plc
 ```mermaid
 sequenceDiagram
     autonumber
