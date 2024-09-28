@@ -795,11 +795,11 @@ dependencies = [
 
 [[package]]
 name = "plc_device"
-version = "2024.9.28"
+version = "2024.9.29"
 
 [[package]]
 name = "plc_proto"
-version = "2024.9.28"
+version = "2024.9.29"
 dependencies = [
  "bitfield-struct",
  "prost 0.13.3",
@@ -816,11 +816,12 @@ dependencies = [
 
 [[package]]
 name = "plc_service"
-version = "2024.9.26"
+version = "2024.9.29"
 dependencies = [
  "plc_proto",
  "prost 0.12.6",
  "prost-types 0.12.6",
+ "tokio",
  "tonic 0.11.0",
  "tracing",
  "tracing-futures",

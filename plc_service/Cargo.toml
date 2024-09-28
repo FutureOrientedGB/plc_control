@@ -1,6 +1,6 @@
 [package]
 name = "plc_service"
-version = "2024.9.26"
+version = "2024.9.29"
 edition = "2021"
 
 [dependencies]
@@ -8,6 +8,8 @@ plc_proto = { path = "../plc_proto" }
 
 prost = { version = "0.12.6" }
 prost-types = { version = "0.12.6" }
+
+tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros"] }
 
 tonic = { version = "0.11.0" }
 
