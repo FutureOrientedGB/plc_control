@@ -2,7 +2,7 @@
 
 ```mermaid
 graph LR;
-    client--rpc+exe-->service--rpc+exe-->adapter--lib-->operator--modbus+exe-->plc
+    client--rpc-->service--rpc-->adapter--modbus-->plc
 ```
 
 ## 1.1. register
@@ -55,17 +55,13 @@ sequenceDiagram
     participant client
     participant service
     participant adapter
-    participant operator
     participant plc
 
 client->>service: control_plc (ControlPlcRequest)
 Note right of service: dispatch to adaptor by type and address
 service->>adapter: control_plc (ControlPlcRequest)
-adapter->>operator: control_plc (ControlPlcRequest)
-Note right of operator: translate pb3 to modbus
-operator->>plc: modbus_write_registers(address, buf, count)
-Note left of operator: translate modbus to pb3
-operator-->>adapter: return (ControlPlcResponse)
+adapter->>plc: modbus_write_registers(address, buf, count)
+Note right of adapter: translate between protocol buffers with modbus
 adapter-->>service: return (ControlPlcResponse)
 service-->>client: return (ControlPlcResponse)
 ```
@@ -78,17 +74,13 @@ sequenceDiagram
     participant client
     participant service
     participant adapter
-    participant operator
     participant plc
 
 client->>service: query_plc (QueryPlcRequest)
 Note right of service: dispatch to adaptor
 service->>adapter: query_plc (QueryPlcRequest)
-adapter->>operator: query_plc (QueryPlcRequest)
-Note right of operator: translate pb3 to modbus
-operator->>plc: modbus_read_registers(address, buf, count)
-Note left of operator: translate modbus to pb3
-operator-->>adapter: return (QueryPlcResponse)
+adapter->>plc: modbus_read_registers(address, buf, count)
+Note right of adapter: translate between protocol buffers with modbus
 adapter-->>service: return (QueryPlcResponse)
 service-->>client: return (QueryPlcResponse)
 ```

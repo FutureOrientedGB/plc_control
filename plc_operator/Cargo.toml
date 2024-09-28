@@ -1,7 +1,0 @@
-[package]
-name = "plc_operator"
-version = "2024.9.26"
-edition = "2021"
-
-[dependencies]
-plc_proto = { path = "../plc_proto" }
