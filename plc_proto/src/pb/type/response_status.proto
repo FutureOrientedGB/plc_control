@@ -17,6 +17,9 @@ enum ResponseCode {
     // invalid field
     field_error = 3;
 
+    // no activated adapter of plc type
+    no_activated_adapter = 4;
+
     // client errors [10000, 199999]
 
     // service errors [20000, 29999]

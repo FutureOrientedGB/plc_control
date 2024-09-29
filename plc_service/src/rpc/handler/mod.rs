@@ -3,8 +3,8 @@ use tonic;
 use plc_proto::plc::{
     plc_service_server::PlcService, ControlPlcRequest, ControlPlcResponse, QueryPlcDevicesRequest,
     QueryPlcDevicesResponse, QueryPlcRequest, QueryPlcResponse, QueryPlcSchemaRequest,
-    QueryPlcSchemaResponse, QueryPlcTypesRequest, QueryPlcTypesResponse, RegisterPlcRequest,
-    RegisterPlcResponse, UpsertPlcDeviceRequest, UpsertPlcDeviceResponse,
+    QueryPlcSchemaResponse, QueryPlcTypesRequest, QueryPlcTypesResponse, ActivateAdapterRequest,
+    ActivateAdapterResponse, UpsertPlcDeviceRequest, UpsertPlcDeviceResponse,
 };
 
 pub mod control_plc;
@@ -22,8 +22,8 @@ pub use query_plc_types::*;
 pub mod query_plc;
 pub use query_plc::*;
 
-pub mod register_plc;
-pub use register_plc::*;
+pub mod activate_adapter;
+pub use activate_adapter::*;
 
 pub mod upsert_plc_device;
 pub use upsert_plc_device::*;
@@ -35,11 +35,11 @@ pub struct MyPlcService {}
 #[tonic::async_trait]
 impl PlcService for MyPlcService {
     // from plc_adapter
-    async fn register_plc(
+    async fn activate_adapter(
         &self,
-        request: tonic::Request<RegisterPlcRequest>,
-    ) -> std::result::Result<tonic::Response<RegisterPlcResponse>, tonic::Status> {
-        register_plc_handler(request).await
+        request: tonic::Request<ActivateAdapterRequest>,
+    ) -> std::result::Result<tonic::Response<ActivateAdapterResponse>, tonic::Status> {
+        activate_adapter_handler(request).await
     }
 
     // from plc_client

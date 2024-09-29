@@ -7,13 +7,13 @@ package plc;
 import "req_resp/control_plc.proto";
 import "req_resp/query_plc_data.proto";
 import "req_resp/query_plc_meta.proto";
-import "req_resp/register_plc.proto";
+import "req_resp/activate_adapter.proto";
 import "req_resp/upsert_plc.proto";
 
 
 service PlcService {
     // from plc_adapter
-    rpc register_plc(RegisterPlcRequest) returns (RegisterPlcResponse) {}
+    rpc activate_adapter(ActivateAdapterRequest) returns (ActivateAdapterResponse) {}
 
     // from plc_client
     rpc query_plc_types(QueryPlcTypesRequest) returns (QueryPlcTypesResponse) {}

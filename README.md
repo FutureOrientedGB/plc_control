@@ -1,18 +1,23 @@
 # 1. Sequence Diagrams
 ```mermaid
 graph LR;
-    client--rpc-->service--rpc-->adapter--modbus-->plc
+    client--rpc-->service<--rpc-->adapter_by_plc_type_m--modbus-->plc_type_m_addr_a
+    adapter_by_plc_type_m--modbus-->plc_type_m_addr_b
+    adapter_by_plc_type_m--modbus-->plc_type_m_addr_c
+    service<--rpc-->adapter_by_plc_type_n--modbus-->plc_type_n_addr_x
+    adapter_by_plc_type_n--modbus-->plc_type_n_addr_y
+    adapter_by_plc_type_n--modbus-->plc_type_n_addr_z
 ```
 
-## 1.1. register
+## 1.1. activate adapter
 ```mermaid
 sequenceDiagram
     autonumber
     participant adapter
     participant service
 
-adapter->>service: register_plc (RegisterPlcRequest)
-service-->>adapter: return (RegisterPlcResponse)
+adapter->>service: activate_adapter (ActivateAdapterRequest)
+service-->>adapter: return (ActivateAdapterResponse)
 
 Note right of service: redis
 ```
@@ -67,10 +72,11 @@ sequenceDiagram
     participant plc
 
 client->>service: control_plc (ControlPlcRequest)
-Note right of service: dispatch to adaptor by type and address
+Note right of service: dispatch to adapter by type
 service->>adapter: control_plc (ControlPlcRequest)
 adapter->>plc: modbus_write_registers(address, buf, count)
-Note right of adapter: translate between protocol buffers with modbus
+Note right of adapter: call plc by address
+Note right of adapter: translate between protocol buffers and modbus registers
 adapter-->>service: return (ControlPlcResponse)
 service-->>client: return (ControlPlcResponse)
 ```
@@ -85,10 +91,11 @@ sequenceDiagram
     participant plc
 
 client->>service: query_plc (QueryPlcRequest)
-Note right of service: dispatch to adaptor
+Note right of service: dispatch to adapter by type
 service->>adapter: query_plc (QueryPlcRequest)
 adapter->>plc: modbus_read_registers(address, buf, count)
-Note right of adapter: translate between protocol buffers with modbus
+Note right of adapter: call plc by address
+Note right of adapter: translate between protocol buffers and modbus registers
 adapter-->>service: return (QueryPlcResponse)
 service-->>client: return (QueryPlcResponse)
 ```

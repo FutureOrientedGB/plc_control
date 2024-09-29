@@ -14,19 +14,21 @@ message BarTypePlcStatus {
 }
 
 message BarTypePlcSchema {
-    repeated BarTypePlcStatus lane_indicator = 1;  // 车指
-    repeated BarTypePlcStatus traffic_light = 2;  // 红绿灯
-    repeated BarTypePlcStatus blower = 3;  // 风机
-    repeated BarTypePlcStatus rolling_door = 4;  // 卷帘门
-    repeated BarTypePlcStatus led = 5;  // 照明
-    repeated BarTypePlcStatus water_pump = 6;  // 水泵
-    repeated BarTypePlcStatus wind_direction = 7;  // 风向
+    bool is_adapter_activated = 1;
 
-    repeated Float32Type co = 8;  // 一氧化碳
-    repeated Float32Type vi = 9;  // 有害气体
-    repeated Float32Type no2 = 10;  // 二氧化氮
-    repeated Float32Type wind_speed = 11;  // 风速
-    repeated Float32Type illuminance = 12;  // 照度
-    repeated Float32Type light_intensity = 13;  // 光强
-    repeated Float32Type liquid_level = 14;  // 液位
+    repeated BarTypePlcStatus lane_indicator = 2;
+    repeated BarTypePlcStatus traffic_light = 3;
+    repeated BarTypePlcStatus blower = 4;
+    repeated BarTypePlcStatus rolling_door = 5;
+    repeated BarTypePlcStatus light = 6;
+    repeated BarTypePlcStatus water_pump = 7;
+    repeated BarTypePlcStatus wind_direction = 8;
+
+    repeated Float32Type co = 9; 
+    repeated Float32Type vi = 10;
+    repeated Float32Type no2 = 11;
+    repeated Float32Type wind_speed = 12;
+    repeated Float32Type illuminance = 13;
+    repeated Float32Type light_intensity = 14;
+    repeated Float32Type liquid_level = 15;
 }

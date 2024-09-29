@@ -28,6 +28,7 @@ impl From<plc::FooTypePlcStatus> for FooTypePlcStatusModbus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum LaneIndicatorStatus {
     Begin,
     AllowForward,
@@ -37,6 +38,7 @@ pub enum LaneIndicatorStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum TrafficLightStatus {
     Begin,
     Read,
@@ -47,6 +49,7 @@ pub enum TrafficLightStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum BlowerStatus {
     Begin,
     On,
@@ -55,6 +58,7 @@ pub enum BlowerStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum RollingDoorStatus {
     Begin,
     Up,
@@ -65,7 +69,8 @@ pub enum RollingDoorStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-pub enum LedStatus {
+#[strum(serialize_all = "snake_case")]
+pub enum LightStatus {
     Begin,
     Open,
     Close,
@@ -73,6 +78,7 @@ pub enum LedStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum WaterPumpStatus {
     Begin,
     On,
@@ -81,6 +87,7 @@ pub enum WaterPumpStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
+#[strum(serialize_all = "snake_case")]
 pub enum WindDirections {
     Begin,
     Forward,
@@ -88,20 +95,10 @@ pub enum WindDirections {
     End,
 }
 
-#[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-pub enum FooTypePlcEnums {
-    LaneIndicatorStatus,
-    TrafficLightStatus,
-    BlowerStatus,
-    RollingDoorStatus,
-    LedStatus,
-    WaterPumpStatus,
-    WindDirections,
-}
-
 impl plc::FooTypePlcSchema {
     pub fn new() -> Self {
         Self {
+            is_adapter_activated: false,
             lane_indicator: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
                     address: 0,
@@ -186,18 +183,18 @@ impl plc::FooTypePlcSchema {
                 }),
                 ..Default::default()
             }],
-            led: vec![plc::FooTypePlcStatus {
+            light: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
                     address: 0,
-                    name: std::any::type_name::<LedStatus>().to_string(),
-                    value: LedStatus::Begin as u32,
-                    names: LedStatus::VARIANTS
+                    name: std::any::type_name::<LightStatus>().to_string(),
+                    value: LightStatus::Begin as u32,
+                    names: LightStatus::VARIANTS
                         .into_iter()
                         .map(|v| v.to_string())
                         .collect(),
-                    values: LedStatus::iter()
+                    values: LightStatus::iter()
                         .filter_map(|v| {
-                            if v != LedStatus::Begin && v != LedStatus::End {
+                            if v != LightStatus::Begin && v != LightStatus::End {
                                 Some(v as u32)
                             } else {
                                 None
