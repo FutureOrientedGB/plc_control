@@ -4,8 +4,10 @@ package plc;
 
 
 enum PlcDeviceTypeId {
-    foo = 0;
-    bar = 1;
+    begin = 0;  // begin (not included)
+    foo = 1;
+    bar = 2;
+    end = 3;  // end (not included)
 }
 
 message DeviceType {

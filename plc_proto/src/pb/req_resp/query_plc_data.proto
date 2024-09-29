@@ -19,7 +19,7 @@ message QueryPlcRequest {
 message QueryPlcResponse {
     message Version {
         QueryPlcVersion request = 1;
-        QueryPlcVersion min_required = 2;
+        QueryPlcVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;

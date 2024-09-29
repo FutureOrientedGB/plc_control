@@ -19,7 +19,7 @@ message RegisterPlcRequest {
 message RegisterPlcResponse {
     message Version {
         RegisterPlcVersion request = 1;
-        RegisterPlcVersion min_required = 2;
+        RegisterPlcVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;

@@ -19,7 +19,7 @@ message ControlPlcRequest {
 message ControlPlcResponse {
     message Version {
         ControlPlcVersion request = 1;
-        ControlPlcVersion min_required = 2;
+        ControlPlcVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;

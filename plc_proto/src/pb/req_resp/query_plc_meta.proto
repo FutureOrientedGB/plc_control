@@ -19,7 +19,7 @@ message QueryPlcTypesRequest {
 message QueryPlcTypesResponse {
     message Version {
         QueryPlcTypesVersion request = 1;
-        QueryPlcTypesVersion min_required = 2;
+        QueryPlcTypesVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;
@@ -38,7 +38,7 @@ message QueryPlcSchemaRequest {
 message QueryPlcSchemaResponse {
     message Version {
         QueryPlcSchemaVersion request = 1;
-        QueryPlcSchemaVersion min_required = 2;
+        QueryPlcSchemaVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;
@@ -57,7 +57,7 @@ message QueryPlcDevicesRequest {
 message QueryPlcDevicesResponse {
     message Version {
         QueryPlcDevicesVersion request = 1;
-        QueryPlcDevicesVersion min_required = 2;
+        QueryPlcDevicesVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;

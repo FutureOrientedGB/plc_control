@@ -6,7 +6,7 @@ use strum_macros::{EnumIter, EnumString, FromRepr};
 use crate::plc;
 
 #[bitfield(u16)]
-struct FooTypePlcStatusModbus {
+pub struct FooTypePlcStatusModbus {
     #[bits(13)]
     pub status: u16,
     #[bits(1)]
@@ -28,7 +28,7 @@ impl From<plc::FooTypePlcStatus> for FooTypePlcStatusModbus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum LaneIndicatorStatus {
+pub enum LaneIndicatorStatus {
     Begin,
     AllowForward,
     Forbidden,
@@ -37,7 +37,7 @@ enum LaneIndicatorStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum TrafficLightStatus {
+pub enum TrafficLightStatus {
     Begin,
     Read,
     Green,
@@ -47,7 +47,7 @@ enum TrafficLightStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum BlowerStatus {
+pub enum BlowerStatus {
     Begin,
     On,
     Off,
@@ -55,7 +55,7 @@ enum BlowerStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum RollingDoorStatus {
+pub enum RollingDoorStatus {
     Begin,
     Up,
     Down,
@@ -65,7 +65,7 @@ enum RollingDoorStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum LedStatus {
+pub enum LedStatus {
     Begin,
     Open,
     Close,
@@ -73,7 +73,7 @@ enum LedStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum WaterPumpStatus {
+pub enum WaterPumpStatus {
     Begin,
     On,
     Off,
@@ -81,7 +81,7 @@ enum WaterPumpStatus {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum WindDirections {
+pub enum WindDirections {
     Begin,
     Forward,
     Reverse,
@@ -89,7 +89,7 @@ enum WindDirections {
 }
 
 #[derive(EnumIter, EnumString, FromRepr, strum_macros::VariantNames, Debug, PartialEq, Eq)]
-enum FooTypePlcEnums {
+pub enum FooTypePlcEnums {
     LaneIndicatorStatus,
     TrafficLightStatus,
     BlowerStatus,

@@ -19,7 +19,7 @@ message UpsertPlcDeviceRequest {
 message UpsertPlcDeviceResponse {
     message Version {
         UpsertPlcVersion request = 1;
-        UpsertPlcVersion min_required = 2;
+        UpsertPlcVersion required = 2;
     };
     Version version = 1;
     ResponseStatus status = 2;

@@ -7,6 +7,16 @@ enum ResponseCode {
     // success
     ok = 0;
 
+    // generate erros [1, 9999]
+    // deprecated (request version less than required)
+    deprecated = 1;
+
+    // required field missing
+    field_missing = 2;
+
+    // invalid field
+    field_error = 3;
+
     // client errors [10000, 199999]
 
     // service errors [20000, 29999]
