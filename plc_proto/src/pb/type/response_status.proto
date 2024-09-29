@@ -18,7 +18,7 @@ enum ResponseCode {
     // plc errors [50000, 59999]
     plc_not_found_error = 50000;
     plc_offline_error = 50001;
-    plc_control_not_supported_error = 50002;
+    plc_auto_mode_error = 50002;
     plc_device_error = 50003;
     plc_logic_error = 50004;
 }

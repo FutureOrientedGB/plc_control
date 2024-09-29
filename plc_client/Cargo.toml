@@ -6,10 +6,10 @@ edition = "2021"
 [dependencies]
 plc_proto = { path = "../plc_proto" }
 
-prost = { version = "0.12.6" }
-prost-types = { version = "0.12.6" }
+prost = { version = "0.13.3" }
+prost-types = { version = "0.13.3" }
 
-tonic = { version = "0.11.0" }
+tonic = { version = "0.12.3" }
 
 tracing = { version = "0.1.40" }
 tracing-futures = { version = "0.2.5" }

@@ -1,13 +1,18 @@
 [package]
 name = "plc_adapter"
-version = "2024.9.26"
+version = "2024.9.29"
 edition = "2021"
 
 [dependencies]
-prost = { version = "0.12.6" }
-prost-types = { version = "0.12.6" }
+plc_proto = { path = "../plc_proto" }
 
-tonic = { version = "0.11.0" }
+prost = { version = "0.13.3" }
+prost-types = { version = "0.13.3" }
+
+tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros"] }
+
+tonic = { version = "0.12.3" }
+tonic-types = { version = "0.12.3" }
 
 tracing = { version = "0.1.40" }
 tracing-futures = { version = "0.2.5" }

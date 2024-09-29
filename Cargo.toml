@@ -1,6 +1,5 @@
 [workspace]
 resolver = "2"
-version = "2024.9.26"
 members = [
     "plc_client",
     "plc_service",
