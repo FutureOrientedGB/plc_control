@@ -6,7 +6,7 @@ use plc_proto::plc::{
     ResponseStatus,
 };
 
-/// from plc_client
+// from plc_client
 pub async fn query_plc_schema_handler(
     request: tonic::Request<QueryPlcSchemaRequest>,
 ) -> std::result::Result<tonic::Response<QueryPlcSchemaResponse>, tonic::Status> {
@@ -53,6 +53,7 @@ pub async fn query_plc_schema_handler(
                 // type foo
                 PlcDeviceTypeId::Foo => {
                     query_plc_schema_response.plc_info = Some(PlcDeviceInfo {
+                        id: String::new(),
                         r#type: Some(plc_type),
                         address: None,
                         schema: Some(plc_device_info::Schema::Foo(FooTypePlcSchema::new())),
@@ -61,6 +62,7 @@ pub async fn query_plc_schema_handler(
                 // type bar
                 PlcDeviceTypeId::Bar => {
                     query_plc_schema_response.plc_info = Some(PlcDeviceInfo {
+                        id: String::new(),
                         r#type: Some(plc_type),
                         address: None,
                         schema: Some(plc_device_info::Schema::Bar(BarTypePlcSchema::new())),

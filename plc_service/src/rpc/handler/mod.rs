@@ -34,7 +34,7 @@ pub struct MyPlcService {}
 
 #[tonic::async_trait]
 impl PlcService for MyPlcService {
-    /// from plc_adapter
+    // from plc_adapter
     async fn register_plc(
         &self,
         request: tonic::Request<RegisterPlcRequest>,
@@ -42,7 +42,7 @@ impl PlcService for MyPlcService {
         register_plc_handler(request).await
     }
 
-    /// from plc_client
+    // from plc_client
     async fn query_plc_types(
         &self,
         request: tonic::Request<QueryPlcTypesRequest>,
@@ -71,7 +71,7 @@ impl PlcService for MyPlcService {
         upsert_plc_device_handler(request).await
     }
 
-    /// from plc_client
+    // from plc_client
     async fn control_plc(
         &self,
         request: tonic::Request<ControlPlcRequest>,

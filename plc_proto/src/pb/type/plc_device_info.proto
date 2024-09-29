@@ -9,12 +9,13 @@ import "schema/bar_type_plc.proto";
 
 
 message PlcDeviceInfo {
-    DeviceType type = 1;
+    string id = 1;
+    DeviceType type = 2;
     oneof address {
-        string tcp_address = 2;
-        string rs232_address = 3;
-        string rs422_address = 4;
-        string rs485_address = 5;
+        string tcp_address = 3;
+        string rs232_address = 4;
+        string rs422_address = 5;
+        string rs485_address = 7;
     };
     oneof schema {
         FooTypePlcSchema foo = 10;

@@ -1,11 +1,11 @@
 use tonic;
 
 use plc_proto::plc::{
-    DeviceType, PlcDeviceTypeId, QueryPlcDevicesVersion, QueryPlcTypesRequest,
+    DeviceType, PlcDeviceTypeId, QueryPlcTypesVersion, QueryPlcTypesRequest,
     QueryPlcTypesResponse, ResponseCode, ResponseStatus,
 };
 
-/// from plc_client
+// from plc_client
 pub async fn query_plc_types_handler(
     request: tonic::Request<QueryPlcTypesRequest>,
 ) -> std::result::Result<tonic::Response<QueryPlcTypesResponse>, tonic::Status> {
@@ -13,12 +13,12 @@ pub async fn query_plc_types_handler(
     let mut query_plc_types_response = QueryPlcTypesResponse::default();
 
     // validate request version with required
-    if query_plc_types_request.version < QueryPlcDevicesVersion::InitE32d88020240927.into() {
+    if query_plc_types_request.version < QueryPlcTypesVersion::InitD699c2120240927.into() {
         query_plc_types_response.status = Some(ResponseStatus {
             code: ResponseCode::Deprecated.into(),
             name: ResponseCode::Deprecated.as_str_name().to_string(),
             message: format!(
-                "QueryPlcDevicesVersion({v}) was deprecated, update your proto file and code",
+                "QueryPlcTypesVersion({v}) was deprecated, update your proto file and code",
                 v = query_plc_types_request.version
             ),
         })

@@ -2,7 +2,7 @@ use tonic;
 
 use plc_proto::plc::{UpsertPlcDeviceRequest, UpsertPlcDeviceResponse};
 
-/// from plc_client
+// from plc_client
 pub async fn upsert_plc_device_handler(
     request: tonic::Request<UpsertPlcDeviceRequest>,
 ) -> std::result::Result<tonic::Response<UpsertPlcDeviceResponse>, tonic::Status> {

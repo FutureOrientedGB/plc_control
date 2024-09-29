@@ -2,7 +2,7 @@ use tonic;
 
 use plc_proto::plc::{QueryPlcDevicesRequest, QueryPlcDevicesResponse};
 
-/// from plc_client
+// from plc_client
 pub async fn query_plc_devices_handler(
     request: tonic::Request<QueryPlcDevicesRequest>,
 ) -> std::result::Result<tonic::Response<QueryPlcDevicesResponse>, tonic::Status> {

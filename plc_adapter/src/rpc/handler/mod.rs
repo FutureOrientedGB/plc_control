@@ -16,7 +16,7 @@ pub struct MyPlcAdapter {}
 
 #[tonic::async_trait]
 impl PlcAdapter for MyPlcAdapter {
-    /// from plc_client
+    // from plc_client
     async fn control_plc(
         &self,
         request: tonic::Request<ControlPlcRequest>,
