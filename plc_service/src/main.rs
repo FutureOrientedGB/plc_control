@@ -14,7 +14,7 @@ pub mod rpc;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // parse conf first from file, then from command lines
     let name = "plc_service";
-    let version = ""; // update by build.rs
+    let version = "851bc42.20240929.164929"; // update by build.rs
     let app = conf::Conf::clap().name(name).version(version);
     let mut conf = conf::Conf::from_clap(&app.get_matches());
     conf.update(&name, &version);
