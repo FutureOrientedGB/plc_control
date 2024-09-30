@@ -9,7 +9,7 @@ graph LR;
     adapter_by_plc_type_n--modbus-->plc_type_n_addr_z
 ```
 
-## 1.1. activate adapter
+## 1.1. activate or leave adapter
 ```mermaid
 sequenceDiagram
     autonumber
@@ -18,6 +18,11 @@ sequenceDiagram
 
 adapter->>service: activate_adapter (ActivateAdapterRequest)
 service-->>adapter: return (ActivateAdapterResponse)
+
+Note right of service: redis
+
+adapter->>service: leave_adapter (LeaveAdapterRequest)
+service-->>adapter: return (LeaveAdapterResponse)
 
 Note right of service: redis
 ```

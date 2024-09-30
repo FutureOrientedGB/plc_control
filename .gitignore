@@ -26,3 +26,6 @@ plc_adapter.toml
 plc_client.toml
 plc_device.toml
 plc_service.toml
+
+# version file
+version.rs

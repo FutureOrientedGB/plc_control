@@ -9,15 +9,15 @@ use plc_proto::plc;
 pub mod conf;
 pub mod log;
 pub mod rpc;
+pub mod version;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // parse conf first from file, then from command lines
     let name = "plc_service";
-    let version = "b4868dd.20240929.234031"; // update by build.rs
-    let app = conf::Conf::clap().name(name).version(version);
+    let app = conf::Conf::clap().name(name).version(version::GIT_COMMIT_VERSION);
     let mut conf = conf::Conf::from_clap(&app.get_matches());
-    conf.update(&name, &version);
+    conf.update(&name, &version::GIT_COMMIT_VERSION);
     let addr = format!("{}:{}", &conf.host, &conf.port);
 
     // init log

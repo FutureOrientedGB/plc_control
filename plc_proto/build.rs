@@ -25,8 +25,8 @@ fn replace_version_in_rs() {
     );
 
     // Replace version string in .rs files
-    let version_regex = Regex::new(r#"let\s+version\s*=\s*.*""#).unwrap();
-    let version_replacement = format!(r#"let version = "{}""#, latest_version);
+    let version_regex = Regex::new(r#"pub static\s+GIT_COMMIT_VERSION:\s+&str\s*=\s*"(.*?)";"#).unwrap();
+    let version_replacement = format!(r#"pub static GIT_COMMIT_VERSION: &str = "{}";"#, latest_version);
     let files = find_rs_files();
     for file in files {
         let original_content = fs::read_to_string(&file).expect("Failed to read file");
@@ -77,13 +77,21 @@ fn find_rs_files() -> Vec<String> {
         if let Some(ext) = path.extension() {
             if ext == "rs" {
                 if let Some(file_name) = path.to_str() {
-                    if !file_name.ends_with("build.rs") {
+                    if file_name.ends_with("version.rs") {
                         files.push(file_name.to_owned());
                     }
                 }
             }
         }
     }
+
+    if files.is_empty() {
+        files.push(String::from("version.rs"));
+
+        let mut file = std::fs::File::create("./src/version.rs").unwrap();
+        std::io::Write::write_all(&mut file, r#"pub static GIT_COMMIT_VERSION: &str = "";"#.as_bytes()).unwrap();
+    }
+
     files
 }
 

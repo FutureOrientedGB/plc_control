@@ -1,12 +1,13 @@
 pub mod rs;
 pub use rs::*;
 
+pub mod version;
+
 pub mod plc {
     tonic::include_proto!("plc");
 }
 
 
 pub fn get_version() -> String {
-    let version = "cc6056a.20240929.164929";
-    return version.to_string();
+    return String::from(version::GIT_COMMIT_VERSION);
 }
