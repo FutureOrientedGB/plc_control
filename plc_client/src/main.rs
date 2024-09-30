@@ -1,7 +1,8 @@
 use clap::Parser;
 
+use plc_log::open_log_file;
+
 pub mod conf;
-pub mod log;
 pub mod version;
 
 fn main() {
@@ -10,6 +11,6 @@ fn main() {
     conf.update(&version::APP_NAME, &version::APP_VERSION);
 
     // init log
-    log::open_log_file(&conf);
+    open_log_file(&conf.app_name, &conf.app_version, conf.service_port);
 
 }

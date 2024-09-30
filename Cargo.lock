@@ -910,24 +910,20 @@ checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 name = "plc_adapter"
 version = "2024.9.30"
 dependencies = [
- "chrono",
  "clap",
  "plc_build",
+ "plc_log",
  "plc_proto",
  "prost",
  "prost-types",
  "redis",
  "serde",
  "serde_json",
- "time",
  "tokio",
  "toml",
  "tonic",
  "tonic-types",
  "tracing",
- "tracing-appender",
- "tracing-futures",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -941,30 +937,34 @@ dependencies = [
 name = "plc_client"
 version = "2024.9.30"
 dependencies = [
- "chrono",
  "clap",
  "plc_build",
+ "plc_log",
  "serde",
  "serde_json",
- "time",
  "toml",
  "tracing",
- "tracing-appender",
- "tracing-futures",
- "tracing-subscriber",
 ]
 
 [[package]]
 name = "plc_device"
 version = "2024.9.30"
 dependencies = [
- "chrono",
  "clap",
  "plc_build",
+ "plc_log",
  "serde",
  "serde_json",
- "time",
  "toml",
+ "tracing",
+]
+
+[[package]]
+name = "plc_log"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "time",
  "tracing",
  "tracing-appender",
  "tracing-futures",
@@ -987,6 +987,7 @@ dependencies = [
  "tonic-build",
  "tonic-reflection",
  "tonic-types",
+ "tracing",
 ]
 
 [[package]]
@@ -996,21 +997,18 @@ dependencies = [
  "chrono",
  "clap",
  "plc_build",
+ "plc_log",
  "plc_proto",
  "prost",
  "prost-types",
  "redis",
  "serde",
  "serde_json",
- "time",
  "tokio",
  "toml",
  "tonic",
  "tonic-types",
  "tracing",
- "tracing-appender",
- "tracing-futures",
- "tracing-subscriber",
 ]
 
 [[package]]

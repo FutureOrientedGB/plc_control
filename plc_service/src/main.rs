@@ -4,10 +4,10 @@ use tokio;
 
 use tonic;
 
+use plc_log::open_log_file;
 use plc_proto::plc;
 
 pub mod conf;
-pub mod log;
 pub mod rpc;
 pub mod version;
 
@@ -19,7 +19,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let addr = format!("{}:{}", &conf.host, &conf.port);
 
     // init log
-    log::open_log_file(&conf);
+    open_log_file(&conf.app_name, &conf.app_version, conf.port);
 
     // init rpc service
     let plc_service = rpc::handler::MyPlcService::default();

@@ -25,7 +25,7 @@ pub struct Conf {
     pub service_host: String,
 
     #[arg(long, default_value = "50051")]
-    pub service_port: i32,
+    pub service_port: u16,
 }
 
 impl Conf {

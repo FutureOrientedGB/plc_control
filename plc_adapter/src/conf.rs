@@ -25,18 +25,24 @@ pub struct Conf {
     pub host: String,
 
     #[arg(long, default_value = "50052")]
-    pub port: i32,
+    pub port: u16,
 
     #[arg(long, default_value = "localhost")]
     pub service_host: String,
 
     #[arg(long, default_value = "50051")]
-    pub service_port: i32,
+    pub service_port: u16,
+
+    #[arg(long)]
+    pub device_type_id: i32,
+
+    #[arg(long)]
+    pub device_type_name: String,
 }
 
 impl Conf {
     pub fn update(&mut self, name: &str, version: &str) {
-        let default_conf = Conf::parse_from(&["--help"]);
+        let default_conf = Conf::parse_from(&["--help", "--device-type-id=0", "--device-type-name=a"]);
 
         self.app_name = name.to_string();
         self.app_version = version.to_string();
@@ -69,6 +75,10 @@ impl Conf {
                     }
                 }
             }
+        }
+
+        if self.port == default_conf.port {
+            self.port += self.device_type_id as u16 - 1;
         }
 
         std::fs::write(self.toml.clone(), toml::to_string_pretty(&self).unwrap()).unwrap();

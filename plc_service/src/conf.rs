@@ -25,7 +25,7 @@ pub struct Conf {
     pub host: String,
 
     #[arg(long, default_value = "50051")]
-    pub port: i32,
+    pub port: u16,
 
     // redis:://{user}:{password}@{host}:{port}
     // unix://{sock_path}?pass={password}
