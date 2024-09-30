@@ -1,6 +1,6 @@
 [package]
 name = "plc_service"
-version = "2024.9.29"
+version = "2024.9.30"
 edition = "2021"
 
 [dependencies]
