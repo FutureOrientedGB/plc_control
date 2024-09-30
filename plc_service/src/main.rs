@@ -14,9 +14,8 @@ pub mod version;
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // parse conf first from file, then from command lines
-    let name = "plc_service";
     let mut conf = conf::Conf::parse();
-    conf.update(&name, &version::GIT_COMMIT_VERSION);
+    conf.update(&version::APP_NAME, &version::APP_VERSION);
     let addr = format!("{}:{}", &conf.host, &conf.port);
 
     // init log

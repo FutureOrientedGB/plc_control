@@ -22,7 +22,7 @@ pub fn open_log_file(conf: &super::conf::Conf) {
     tracing_subscriber::fmt()
         .with_writer(tracing_appender::rolling::daily(
             &log_dir,
-            format!("{}.{}.log", &conf.name, &conf.port),
+            format!("{}.{}.log", &conf.app_name, &conf.port),
         ))
         .with_max_level(Level::INFO)
         .with_timer(OffsetTime::new(
@@ -37,14 +37,14 @@ pub fn open_log_file(conf: &super::conf::Conf) {
     println!(
         "loggging to: {}/{}.{}.log.{}",
         &log_dir,
-        &conf.name,
+        &conf.app_name,
         &conf.port,
         Local::now().format("%Y-%m-%d")
     );
 
     tracing::info!(
-        conf.name,
-        conf.version,
+        conf.app_name,
+        conf.app_version,
         conf.host,
         conf.port,
         "open daily log file"

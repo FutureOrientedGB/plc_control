@@ -9,5 +9,5 @@ pub mod plc {
 
 
 pub fn get_version() -> String {
-    return String::from(version::GIT_COMMIT_VERSION);
+    return String::from(version::APP_VERSION);
 }

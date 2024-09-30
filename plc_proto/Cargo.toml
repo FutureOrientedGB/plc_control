@@ -21,7 +21,6 @@ tonic-types = { version = "0.12.3" }
 
 
 [build-dependencies]
+plc_build = { path = "../plc_build" }
 tonic-build = { version = "0.12.3", features = ["prost"] }
-regex = { version = "1.10.6" }
-walkdir = { version = "2.5.0" }
 

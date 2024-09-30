@@ -1,0 +1,7 @@
+[package]
+name = "plc_build"
+version = "2023.8.29"
+edition = "2021"
+
+[dependencies]
+regex = { version = "1.10.6" }
