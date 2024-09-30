@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceRoot}/target/debug/plc_service.exe",
-            "args": ["--port=1234"],
+            "args": ["--help"],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],

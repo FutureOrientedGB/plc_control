@@ -1,4 +1,4 @@
-use structopt::StructOpt;
+use clap::Parser;
 
 use tokio;
 
@@ -15,8 +15,7 @@ pub mod version;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // parse conf first from file, then from command lines
     let name = "plc_service";
-    let app = conf::Conf::clap().name(name).version(version::GIT_COMMIT_VERSION);
-    let mut conf = conf::Conf::from_clap(&app.get_matches());
+    let mut conf = conf::Conf::parse();
     conf.update(&name, &version::GIT_COMMIT_VERSION);
     let addr = format!("{}:{}", &conf.host, &conf.port);
 
