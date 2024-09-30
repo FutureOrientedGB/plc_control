@@ -4,10 +4,13 @@ package plc;
 
 
 // keep dictionary order
-import "req_resp/control_plc.proto";
-import "req_resp/query_plc_data.proto";
-import "req_resp/query_plc_meta.proto";
 import "req_resp/activate_adapter.proto";
+import "req_resp/control_plc.proto";
+import "req_resp/leave_adapter.proto";
+import "req_resp/query_plc_devices.proto";
+import "req_resp/query_plc_schema.proto";
+import "req_resp/query_plc_types.proto";
+import "req_resp/query_plc.proto";
 import "req_resp/upsert_plc.proto";
 
 

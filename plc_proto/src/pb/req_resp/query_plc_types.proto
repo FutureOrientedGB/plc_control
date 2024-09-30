@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_type.proto";
+import "type/response_status.proto";
+
+
+enum QueryPlcTypesVersion {
+    init_d699c21_20240927 = 0;
+}
+
+message QueryPlcTypesRequest {
+    QueryPlcTypesVersion version = 1;
+}
+
+message QueryPlcTypesResponse {
+    message Version {
+        QueryPlcTypesVersion request = 1;
+        QueryPlcTypesVersion required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+    repeated DeviceType plc_types = 3;
+}

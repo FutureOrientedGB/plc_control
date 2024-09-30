@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package plc;
+
+
+import "type/plc_device_type.proto";
+import "type/response_status.proto";
+
+
+enum LeaveAdapterVersion {
+    init_ded380b_20240930 = 0;
+}
+
+message LeaveAdapterRequest {
+    LeaveAdapterVersion version = 1;
+    DeviceType type = 2;
+}
+
+message LeaveAdapterResponse {
+    message Version {
+        LeaveAdapterVersion request = 1;
+        LeaveAdapterVersion required = 2;
+    };
+    Version version = 1;
+    ResponseStatus status = 2;
+}
