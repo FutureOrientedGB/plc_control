@@ -25,10 +25,10 @@ pub async fn query_plc_types_handler(
     }
 
     let mut types = vec![];
-    for typd_id in PlcDeviceTypeId::Begin as i32 + 1..PlcDeviceTypeId::End as i32 {
+    for type_id in PlcDeviceTypeId::Begin as i32 + 1..PlcDeviceTypeId::End as i32 {
         types.push(DeviceType {
-            id: typd_id,
-            name: PlcDeviceTypeId::try_from(typd_id)
+            id: type_id,
+            name: PlcDeviceTypeId::try_from(type_id)
                 .unwrap()
                 .as_str_name()
                 .to_string(),

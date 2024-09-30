@@ -7,6 +7,8 @@ edition = "2021"
 plc_log = { path = "../plc_log" }
 plc_proto = { path = "../plc_proto" }
 
+local-ip-address = { version = "0.6.3" }
+
 prost = { version = "0.13.3" }
 prost-types = { version = "0.13.3" }
 

@@ -3,14 +3,15 @@ use crate::plc;
 
 impl PlcServiceRpcClient {
     pub async fn leave_adapter(
-        client: &mut plc::plc_service_client::PlcServiceClient<tonic::transport::Channel>,
-        req: plc::LeaveAdapterRequest,
+        &mut self,
+        request: plc::LeaveAdapterRequest,
     ) -> Result<plc::LeaveAdapterResponse, ()> {
-        match client.leave_adapter(req.clone()).await {
+        match self.client.leave_adapter(request.clone()).await {
             Err(status) => {
                 tracing::error!(
-                    "PlcServiceRpcClient::leave_adapter error, request: {:?}, status: {}",
-                    &req,
+                    "PlcServiceRpcClient::leave_adapter error, addr: {}, request: {:?}, status: {}",
+                    &self.addr,
+                    &request,
                     status
                 );
                 Err(())

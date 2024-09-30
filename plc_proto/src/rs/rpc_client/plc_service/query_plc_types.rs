@@ -3,14 +3,15 @@ use crate::plc;
 
 impl PlcServiceRpcClient {
     pub async fn query_plc_types(
-        client: &mut plc::plc_service_client::PlcServiceClient<tonic::transport::Channel>,
-        req: plc::QueryPlcTypesRequest,
+        &mut self,
+        request: plc::QueryPlcTypesRequest,
     ) -> Result<plc::QueryPlcTypesResponse, ()> {
-        match client.query_plc_types(req.clone()).await {
+        match self.client.query_plc_types(request.clone()).await {
             Err(status) => {
                 tracing::error!(
-                    "PlcServiceRpcClient::query_plc_types error, request: {:?}, status: {}",
-                    &req,
+                    "PlcServiceRpcClient::query_plc_types error, addr: {}, request: {:?}, status: {}",
+                    &self.addr,
+                    &request,
                     status
                 );
                 Err(())

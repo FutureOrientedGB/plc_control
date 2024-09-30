@@ -21,6 +21,9 @@ pub struct Conf {
     #[arg(long, default_value = "#app_name#.toml")]
     pub toml: String,
 
+    #[arg(long, default_value = "")]
+    pub my_ip: String,
+
     #[arg(long, default_value = "0.0.0.0")]
     pub host: String,
 
@@ -41,7 +44,7 @@ pub struct Conf {
 }
 
 impl Conf {
-    pub fn update(&mut self, name: &str, version: &str) {
+    pub fn update(&mut self, name: &str, version: &str, my_ip: String) {
         let default_conf = Conf::parse_from(&["--help", "--device-type-id=0", "--device-type-name=a"]);
 
         self.app_name = name.to_string();
@@ -60,6 +63,9 @@ impl Conf {
                         );
                     }
                     Ok(c) => {
+                        if self.my_ip == default_conf.my_ip {
+                            self.my_ip = c.my_ip;
+                        }
                         if self.host == default_conf.host {
                             self.host = c.host;
                         }
@@ -75,6 +81,10 @@ impl Conf {
                     }
                 }
             }
+        }
+
+        if self.my_ip == default_conf.my_ip {
+            self.my_ip = my_ip;
         }
 
         if self.port == default_conf.port {

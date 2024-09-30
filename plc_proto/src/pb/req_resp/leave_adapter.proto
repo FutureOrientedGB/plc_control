@@ -14,6 +14,8 @@ enum LeaveAdapterVersion {
 message LeaveAdapterRequest {
     LeaveAdapterVersion version = 1;
     DeviceType type = 2;
+    string rpc_host = 3;
+    uint32 rpc_port = 4;
 }
 
 message LeaveAdapterResponse {
