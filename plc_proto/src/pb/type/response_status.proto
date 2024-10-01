@@ -23,6 +23,7 @@ enum ResponseCode {
     // client errors [10000, 199999]
 
     // service errors [20000, 29999]
+    service_store_error = 20000;
 
     // adapter errors [30000, 39999]
 

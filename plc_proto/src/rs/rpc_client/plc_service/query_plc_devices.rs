@@ -1,18 +1,20 @@
+use stdext::function_name;
+
 use super::PlcServiceRpcClient;
 use crate::plc;
 
 impl PlcServiceRpcClient {
     pub async fn query_plc_devices(
         &mut self,
-        req: plc::QueryPlcDevicesRequest,
+        request: plc::QueryPlcDevicesRequest,
     ) -> Result<plc::QueryPlcDevicesResponse, ()> {
-        match self.client.query_plc_devices(req.clone()).await {
+        match self.client.query_plc_devices(request.clone()).await {
             Err(status) => {
                 tracing::error!(
-                    "PlcServiceRpcClient::query_plc_devices error, addr: {}, request: {:?}, status: {}",
-                    &self.addr,
-                    &req,
-                    status
+                    func = function_name!(),
+                    addr = self.addr,
+                    request = serde_json::to_string(&request).unwrap(),
+                    status = status.to_string(),
                 );
                 Err(())
             }

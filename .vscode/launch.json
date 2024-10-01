@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceRoot}/target/debug/plc_service.exe",
-            "args": ["--help"],
+            "args": ["--redis-url=redis://:123456@localhost:6379"],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
             "environment": [],

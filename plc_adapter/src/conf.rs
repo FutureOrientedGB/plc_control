@@ -45,7 +45,8 @@ pub struct Conf {
 
 impl Conf {
     pub fn update(&mut self, name: &str, version: &str, my_ip: String) {
-        let default_conf = Conf::parse_from(&["--help", "--device-type-id=0", "--device-type-name=a"]);
+        let default_conf =
+            Conf::parse_from(&["--help", "--device-type-id=0", "--device-type-name=a"]);
 
         self.app_name = name.to_string();
         self.app_version = version.to_string();
@@ -56,10 +57,10 @@ impl Conf {
                 match toml::from_str::<Conf>(&content) {
                     Err(e) => {
                         tracing::error!(
-                            "parse toml error, path: {}, text: {}, error: {}",
-                            &self.toml,
-                            &content,
-                            e
+                            message = "toml::from_str error",
+                            path = self.toml,
+                            text = content,
+                            error = e.to_string(),
                         );
                     }
                     Ok(c) => {

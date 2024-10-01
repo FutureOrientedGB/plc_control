@@ -1,3 +1,5 @@
+use stdext::function_name;
+
 use super::PlcAdapterRpcClient;
 use crate::plc;
 
@@ -9,10 +11,10 @@ impl PlcAdapterRpcClient {
         match self.client.query_plc(request.clone()).await {
             Err(status) => {
                 tracing::error!(
-                    "PlcAdapterRpcClient::query_plc error, addr: {}, request: {:?}, status: {}",
-                    &self.addr,
-                    &request,
-                    status
+                    func = function_name!(),
+                    addr = self.addr,
+                    request = serde_json::to_string(&request).unwrap(),
+                    status = status.to_string(),
                 );
                 Err(())
             }

@@ -12,6 +12,8 @@ prost-types = { version = "0.13.3" }
 serde = { version = "1.0.210", features = ["derive"] }
 serde_json = { version = "1.0.128" }
 
+stdext = { version = "0.3.3" }
+
 strum = { version = "0.26.3" }
 strum_macros = { version = "0.26.3" }
 

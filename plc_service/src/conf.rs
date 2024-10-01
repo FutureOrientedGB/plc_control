@@ -35,6 +35,18 @@ pub struct Conf {
     // auto replace
     #[arg(long, default_value = "#app_name#:hash_devices")]
     pub redis_key_hash_devices: String,
+
+    // auto replace
+    #[arg(long, default_value = "#app_name#:hash_device_type_id")]
+    pub redis_key_hash_device_type_id: String,
+
+    // auto replace
+    #[arg(long, default_value = "#app_name#:hash_device_type_name")]
+    pub redis_key_hash_device_type_name: String,
+
+    // auto replace
+    #[arg(long, default_value = "#app_name#:zset_device_type_heartbeat")]
+    pub redis_key_hash_device_type_heartbeat: String,
 }
 
 impl Conf {
@@ -45,16 +57,19 @@ impl Conf {
         self.app_version = version.to_string();
         self.toml = self.toml.replace("#app_name#", &name);
         self.redis_key_hash_devices = self.redis_key_hash_devices.replace("#app_name#", &name);
+        self.redis_key_hash_device_type_id = self.redis_key_hash_device_type_id.replace("#app_name#", &name);
+        self.redis_key_hash_device_type_name = self.redis_key_hash_device_type_name.replace("#app_name#", &name);
+        self.redis_key_hash_device_type_heartbeat = self.redis_key_hash_device_type_heartbeat.replace("#app_name#", &name);
 
         if std::path::Path::new(&self.toml).exists() {
             if let Ok(content) = std::fs::read_to_string(&self.toml) {
                 match toml::from_str::<Conf>(&content) {
                     Err(e) => {
                         tracing::error!(
-                            "parse toml error, path: {}, text: {}, error: {}",
-                            &self.toml,
-                            &content,
-                            e
+                            message = "toml::from_str error",
+                            path = self.toml,
+                            text = content,
+                            error = e.to_string(),
                         );
                     }
                     Ok(c) => {

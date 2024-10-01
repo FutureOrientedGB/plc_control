@@ -7,6 +7,8 @@ use tokio;
 
 use tonic;
 
+use stdext::function_name;
+
 use plc_log::open_log_file;
 use plc_proto::{plc, rpc_client};
 
@@ -44,7 +46,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             ));
         }
         eprintln!("available device types: \n{}", device_types.join("\n"));
-        tracing::error!("available device types: \n{}", device_types.join("\n"))
+        tracing::error!(message = "available device types", device_types = device_types.join("\n"))
     } else {
         // init rpc service
         let plc_adapter = rpc::handler::MyPlcAdapter::default();
@@ -95,11 +97,11 @@ async fn run_background_tasks(
                 },
                 _ = tokio::time::sleep(tokio::time::Duration::from_secs(1)) => {
                     if times % 60 == 0 {
-                        tracing::info!("activate_adapter begin, times: {}", times);
+                        tracing::info!(message = "activate_adapter", func = function_name!(), end = false, times = times);
                     }
                     let _ = service_rpc_client.activate_adapter(req.clone()).await;
                     if times % 60 == 0 {
-                        tracing::info!("activate_adapter end, times: {}", times);
+                        tracing::info!(message = "activate_adapter", func = function_name!(), end = true, times = times);
                     }
                     times += 1;
                 }
@@ -115,9 +117,9 @@ async fn stop_background_tasks(
     handle: tokio::task::JoinHandle<()>,
 ) {
     // notify
-    tracing::warn!("background tasks stopping");
+    tracing::warn!(func = function_name!(), end = false);
     let _ = quit_tx.send(());
     // wait to quit
     let _ = tokio::join!(handle);
-    tracing::warn!("background tasks stopped");
+    tracing::warn!(func = function_name!(), end = true);
 }

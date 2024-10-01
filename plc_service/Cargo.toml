@@ -28,6 +28,8 @@ tonic-types = { version = "0.12.3" }
 
 tracing = { version = "0.1.40" }
 
+stdext = { version = "0.3.3" }
+
 
 [build-dependencies]
 plc_build = { path = "../plc_build" }

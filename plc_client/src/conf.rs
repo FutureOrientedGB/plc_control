@@ -41,10 +41,10 @@ impl Conf {
                 match toml::from_str::<Conf>(&content) {
                     Err(e) => {
                         tracing::error!(
-                            "parse toml error, path: {}, text: {}, error: {}",
-                            &self.toml,
-                            &content,
-                            e
+                            message = "toml::from_str error",
+                            path = self.toml,
+                            text = content,
+                            error = e.to_string(),
                         );
                     }
                     Ok(c) => {

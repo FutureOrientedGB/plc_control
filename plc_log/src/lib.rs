@@ -42,5 +42,10 @@ pub fn open_log_file(app_name: &str, app_version: &str, app_port: u16) {
         Local::now().format("%Y-%m-%d")
     );
 
-    tracing::info!(app_name, app_version, app_port, "open daily log file");
+    tracing::info!(
+        message = "open log file",
+        app_name = app_name,
+        app_version = app_version,
+        app_port = app_port,
+    );
 }
