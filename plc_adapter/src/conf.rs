@@ -88,10 +88,11 @@ impl Conf {
             self.my_ip = my_ip;
         }
 
+        self.port = default_conf.port;
+        std::fs::write(self.toml.clone(), toml::to_string_pretty(&self).unwrap()).unwrap();
+
         if self.port == default_conf.port {
             self.port += self.device_type_id as u16 - 1;
         }
-
-        std::fs::write(self.toml.clone(), toml::to_string_pretty(&self).unwrap()).unwrap();
     }
 }
