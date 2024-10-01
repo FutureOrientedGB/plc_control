@@ -78,7 +78,7 @@ async fn run_background_tasks(
             rpc_client::PlcServiceRpcClient::new(&conf.service_host, conf.service_port);
 
         let req = plc::ActivateAdapterRequest {
-            version: plc::ActivateAdapterVersion::InitEa5a12b20240930.into(),
+            version: plc::ActivateAdapterVersion::ActivateAdapter20240930.into(),
             r#type: Some(plc::DeviceType {
                 id: conf.device_type_id,
                 name: conf.device_type_name,

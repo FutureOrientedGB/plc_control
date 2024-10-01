@@ -8,6 +8,9 @@ use plc_proto::plc::{
     UpsertPlcDeviceRequest, UpsertPlcDeviceResponse,
 };
 
+pub mod activate_adapter;
+pub use activate_adapter::*;
+
 pub mod control_plc;
 pub use control_plc::*;
 
@@ -23,11 +26,14 @@ pub use query_plc_types::*;
 pub mod query_plc;
 pub use query_plc::*;
 
-pub mod activate_adapter;
-pub use activate_adapter::*;
+pub mod leave_adapter;
+pub use leave_adapter::*;
 
 pub mod upsert_plc_device;
 pub use upsert_plc_device::*;
+
+pub mod validator;
+pub use validator::*;
 
 #[derive(Debug, Default)]
 pub struct MyPlcService {}

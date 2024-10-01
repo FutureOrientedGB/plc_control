@@ -8,7 +8,7 @@ import "type/response_status.proto";
 
 
 enum ControlPlcVersion {
-    init_c37c493_20240927 = 0;
+    ControlPlc20240927 = 0;
 }
 
 message ControlPlcRequest {

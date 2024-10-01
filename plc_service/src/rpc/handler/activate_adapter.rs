@@ -1,23 +1,22 @@
 use tonic;
 
-use plc_proto::plc::{ActivateAdapterRequest, ActivateAdapterResponse, LeaveAdapterRequest, LeaveAdapterResponse};
+use plc_proto::plc::{ActivateAdapterRequest, ActivateAdapterResponse, ActivateAdapterVersion};
+
+use super::validate_version;
 
 // from plc_client
 pub async fn activate_adapter_handler(
     request: tonic::Request<ActivateAdapterRequest>,
 ) -> std::result::Result<tonic::Response<ActivateAdapterResponse>, tonic::Status> {
-    let _activate_adapter_request = request.into_inner();
-    let activate_adapter_response = ActivateAdapterResponse::default();
-    let response = tonic::Response::new(activate_adapter_response);
-    return Ok(response);
-}
+    let req = request.into_inner();
+    let mut resp = ActivateAdapterResponse::default();
 
-// from plc_client
-pub async fn leave_adapter_handler(
-    request: tonic::Request<LeaveAdapterRequest>,
-) -> std::result::Result<tonic::Response<LeaveAdapterResponse>, tonic::Status> {
-    let _leave_adapter_request = request.into_inner();
-    let leave_adapter_response = LeaveAdapterResponse::default();
-    let response = tonic::Response::new(leave_adapter_response);
-    return Ok(response);
+    // validate request version with required
+    resp.status = validate_version(
+        req.version,
+        ActivateAdapterVersion::ActivateAdapter20240930.into(),
+        std::any::type_name::<ActivateAdapterVersion>(),
+    );
+
+    return Ok(tonic::Response::new(resp));
 }

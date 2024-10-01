@@ -8,7 +8,7 @@ import "type/response_status.proto";
 
 
 enum UpsertPlcVersion {
-    init_95cbe17_20240928 = 0;
+    UpsertPlc20240928 = 0;
 }
 
 message UpsertPlcDeviceRequest {

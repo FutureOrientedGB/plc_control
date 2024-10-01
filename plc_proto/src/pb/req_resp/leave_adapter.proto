@@ -8,7 +8,7 @@ import "type/response_status.proto";
 
 
 enum LeaveAdapterVersion {
-    init_ded380b_20240930 = 0;
+    LeaveAdapter20240930 = 0;
 }
 
 message LeaveAdapterRequest {

@@ -9,7 +9,7 @@ import "type/response_status.proto";
 
 
 enum QueryPlcSchemaVersion {
-    init_dd141e3_20240927 = 0;
+    QueryPlcSchema20240927 = 0;
 }
 
 message QueryPlcSchemaRequest {

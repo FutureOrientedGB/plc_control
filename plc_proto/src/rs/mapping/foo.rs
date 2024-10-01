@@ -96,9 +96,9 @@ pub enum WindDirections {
 }
 
 impl plc::FooTypePlcSchema {
-    pub fn new() -> Self {
+    pub fn new(activated: bool) -> Self {
         Self {
-            is_adapter_activated: false,
+            is_adapter_activated: activated,
             lane_indicator: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
                     address: 0,

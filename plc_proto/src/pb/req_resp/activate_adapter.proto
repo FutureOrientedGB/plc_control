@@ -8,7 +8,7 @@ import "type/response_status.proto";
 
 
 enum ActivateAdapterVersion {
-    init_ea5a12b_20240930 = 0;
+    ActivateAdapter20240930 = 0;
 }
 
 message ActivateAdapterRequest {

@@ -9,7 +9,7 @@ import "type/response_status.proto";
 
 
 enum QueryPlcDevicesVersion {
-    init_e32d880_20240927 = 0;
+    QueryPlcDevices20240927 = 0;
 }
 
 message QueryPlcDevicesRequest {

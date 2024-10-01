@@ -1,28 +1,24 @@
 use tonic;
 
 use plc_proto::plc::{
-    DeviceType, PlcDeviceTypeId, QueryPlcTypesVersion, QueryPlcTypesRequest,
-    QueryPlcTypesResponse, ResponseCode, ResponseStatus,
+    DeviceType, PlcDeviceTypeId, QueryPlcTypesRequest, QueryPlcTypesResponse, QueryPlcTypesVersion,
 };
+
+use super::validate_version;
 
 // from plc_client
 pub async fn query_plc_types_handler(
     request: tonic::Request<QueryPlcTypesRequest>,
 ) -> std::result::Result<tonic::Response<QueryPlcTypesResponse>, tonic::Status> {
-    let query_plc_types_request = request.into_inner();
-    let mut query_plc_types_response = QueryPlcTypesResponse::default();
+    let req = request.into_inner();
+    let mut resp = QueryPlcTypesResponse::default();
 
     // validate request version with required
-    if query_plc_types_request.version < QueryPlcTypesVersion::InitD699c2120240927.into() {
-        query_plc_types_response.status = Some(ResponseStatus {
-            code: ResponseCode::Deprecated.into(),
-            name: ResponseCode::Deprecated.as_str_name().to_string(),
-            message: format!(
-                "QueryPlcTypesVersion({v}) was deprecated, update your proto file and code",
-                v = query_plc_types_request.version
-            ),
-        })
-    }
+    resp.status = validate_version(
+        req.version,
+        QueryPlcTypesVersion::QueryPlcTypes20240927.into(),
+        std::any::type_name::<QueryPlcTypesVersion>(),
+    );
 
     let mut types = vec![];
     for type_id in PlcDeviceTypeId::Begin as i32 + 1..PlcDeviceTypeId::End as i32 {
@@ -34,8 +30,7 @@ pub async fn query_plc_types_handler(
                 .to_string(),
         });
     }
-    query_plc_types_response.plc_types = types;
+    resp.plc_types = types;
 
-    let response = tonic::Response::new(query_plc_types_response);
-    return Ok(response);
+    return Ok(tonic::Response::new(resp));
 }

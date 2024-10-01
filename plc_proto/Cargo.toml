@@ -1,6 +1,6 @@
 [package]
 name = "plc_proto"
-version = "2024.9.30"
+version = "2024.10.1"
 edition = "2021"
 
 [dependencies]

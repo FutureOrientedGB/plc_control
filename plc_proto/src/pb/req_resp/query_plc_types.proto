@@ -8,7 +8,7 @@ import "type/response_status.proto";
 
 
 enum QueryPlcTypesVersion {
-    init_d699c21_20240927 = 0;
+    QueryPlcTypes20240927 = 0;
 }
 
 message QueryPlcTypesRequest {
