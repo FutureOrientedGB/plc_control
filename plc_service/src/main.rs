@@ -60,7 +60,7 @@ async fn run_background_tasks(
                 _ = quit_rx.recv() => {
                     break;
                 },
-                _ = tokio::time::sleep(tokio::time::Duration::from_secs(15)) => {
+                _ = tokio::time::sleep(tokio::time::Duration::from_secs(30)) => {
                     if times % 60 == 0 {
                         tracing::info!(message = "remove_expired_adapter", func = function_name!(), end = false, times = times);
                     }

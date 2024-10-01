@@ -95,7 +95,7 @@ async fn run_background_tasks(
                 _ = quit_rx.recv() => {
                     break;
                 },
-                _ = tokio::time::sleep(tokio::time::Duration::from_secs(1)) => {
+                _ = tokio::time::sleep(tokio::time::Duration::from_secs(10)) => {
                     if times % 60 == 0 {
                         tracing::info!(message = "activate_adapter", func = function_name!(), end = false, times = times);
                     }

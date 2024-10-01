@@ -9,15 +9,17 @@ graph LR;
     adapter_by_plc_type_n--modbus-->plc_type_n_addr_z
 ```
 
-## 1.1. activate or leave adapter
+## 1.1. activate/leave/remove adapter
 ```mermaid
 sequenceDiagram
     autonumber
     participant adapter
     participant service
 
-adapter->>service: activate_adapter (ActivateAdapterRequest)
-service-->>adapter: return (ActivateAdapterResponse)
+loop every 10 seconds
+    adapter->>service: activate_adapter (ActivateAdapterRequest)
+    service-->>adapter: return (ActivateAdapterResponse)
+end
 
 Note right of service: redis
 
@@ -25,6 +27,11 @@ adapter->>service: leave_adapter (LeaveAdapterRequest)
 service-->>adapter: return (LeaveAdapterResponse)
 
 Note right of service: redis
+
+loop every 30 seconds
+    service->>service: remove_expired_adapter
+    Note right of service: redis
+end
 ```
 
 ## 1.2. query types and schema
