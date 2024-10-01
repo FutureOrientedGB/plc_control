@@ -1,7 +1,9 @@
 use tonic;
 
 use plc_proto::plc::{
-    plc_device_info, BarTypePlcSchema, DeviceType, FooTypePlcSchema, PlcDeviceInfo, PlcDeviceTypeId, QueryPlcSchemaRequest, QueryPlcSchemaResponse, QueryPlcSchemaVersion, ResponseCode, ResponseStatus
+    plc_device_info, query_plc_schema_response, BarTypePlcSchema, DeviceType, FooTypePlcSchema,
+    PlcDeviceInfo, PlcDeviceTypeId, QueryPlcSchemaRequest, QueryPlcSchemaResponse,
+    QueryPlcSchemaVersion, ResponseCode, ResponseStatus,
 };
 
 use super::MyPlcService;
@@ -14,6 +16,10 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<QueryPlcSchemaResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = QueryPlcSchemaResponse::default();
+        resp.version = Some(query_plc_schema_response::Version {
+            request: req.version,
+            required: QueryPlcSchemaVersion::QueryPlcSchema20240927.into(),
+        });
 
         // validate request version with required
         resp.status = Self::validate_version(
@@ -54,13 +60,12 @@ impl MyPlcService {
                             r#type: Some(plc_type),
                             address: None,
                             schema: Some(plc_device_info::Schema::Foo(FooTypePlcSchema::new(
-                                self.store
-                                    .find_adapter(
-                                        DeviceType {
-                                            id: PlcDeviceTypeId::Foo.into(),
-                                            name: PlcDeviceTypeId::Foo.as_str_name().to_string(),
-                                        }
-                                    )
+                                !self
+                                    .store
+                                    .find_adapter(DeviceType {
+                                        id: PlcDeviceTypeId::Foo.into(),
+                                        name: PlcDeviceTypeId::Foo.as_str_name().to_string(),
+                                    })
                                     .await
                                     .is_empty(),
                             ))),
@@ -73,13 +78,12 @@ impl MyPlcService {
                             r#type: Some(plc_type),
                             address: None,
                             schema: Some(plc_device_info::Schema::Bar(BarTypePlcSchema::new(
-                                self.store
-                                    .find_adapter(
-                                        DeviceType {
-                                            id: PlcDeviceTypeId::Bar.into(),
-                                            name: PlcDeviceTypeId::Bar.as_str_name().to_string(),
-                                        }
-                                    )
+                                !self
+                                    .store
+                                    .find_adapter(DeviceType {
+                                        id: PlcDeviceTypeId::Bar.into(),
+                                        name: PlcDeviceTypeId::Bar.as_str_name().to_string(),
+                                    })
                                     .await
                                     .is_empty(),
                             ))),

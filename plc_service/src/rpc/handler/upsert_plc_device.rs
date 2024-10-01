@@ -1,6 +1,6 @@
 use tonic;
 
-use plc_proto::plc::{UpsertPlcDeviceRequest, UpsertPlcDeviceResponse, UpsertPlcVersion};
+use plc_proto::plc::{upsert_plc_device_response, UpsertPlcDeviceRequest, UpsertPlcDeviceResponse, UpsertPlcVersion};
 
 use super::MyPlcService;
 
@@ -12,6 +12,10 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<UpsertPlcDeviceResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = UpsertPlcDeviceResponse::default();
+        resp.version = Some(upsert_plc_device_response::Version {
+            request: req.version,
+            required: UpsertPlcVersion::UpsertPlc20240928.into(),
+        });
 
         // validate request version with required
         resp.status = Self::validate_version(

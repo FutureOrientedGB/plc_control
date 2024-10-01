@@ -1,6 +1,6 @@
 use tonic;
 
-use plc_proto::plc::{QueryPlcDevicesRequest, QueryPlcDevicesResponse, QueryPlcDevicesVersion};
+use plc_proto::plc::{query_plc_devices_response, QueryPlcDevicesRequest, QueryPlcDevicesResponse, QueryPlcDevicesVersion};
 
 use super::MyPlcService;
 
@@ -12,7 +12,11 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<QueryPlcDevicesResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = QueryPlcDevicesResponse::default();
-
+        resp.version = Some(query_plc_devices_response::Version {
+            request: req.version,
+            required: QueryPlcDevicesVersion::QueryPlcDevices20240927.into(),
+        });
+        
         // validate request version with required
         resp.status = Self::validate_version(
             req.version,

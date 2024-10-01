@@ -1,10 +1,11 @@
 [package]
 name = "plc_client"
-version = "2024.10.1"
+version = "2024.10.2"
 edition = "2021"
 
 [dependencies]
 plc_log = { path = "../plc_log" }
+plc_proto = { path = "../plc_proto" }
 
 serde = { version = "1.0.210", features = ["derive"] }
 serde_json = { version = "1.0.128" }
@@ -14,6 +15,8 @@ clap = { version = "4.5.18", features = ["derive"] }
 stdext = { version = "0.3.3" }
 
 toml = { version = "0.8.19" }
+
+tokio = { version = "1.40.0", features = ["rt-multi-thread", "macros"] }
 
 tracing = { version = "0.1.40" }
 

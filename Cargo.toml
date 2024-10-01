@@ -3,7 +3,6 @@ resolver = "2"
 members = [
     "plc_build",
     "plc_log",
-    # "plc_timer",
     "plc_client",
     "plc_service",
     "plc_adapter",

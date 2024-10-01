@@ -974,14 +974,16 @@ dependencies = [
 
 [[package]]
 name = "plc_client"
-version = "2024.10.1"
+version = "2024.10.2"
 dependencies = [
  "clap",
  "plc_build",
  "plc_log",
+ "plc_proto",
  "serde",
  "serde_json",
  "stdext",
+ "tokio",
  "toml",
  "tracing",
 ]
@@ -1014,7 +1016,7 @@ dependencies = [
 
 [[package]]
 name = "plc_proto"
-version = "2024.10.1"
+version = "2024.10.2"
 dependencies = [
  "bitfield-struct",
  "plc_build",
@@ -1034,7 +1036,7 @@ dependencies = [
 
 [[package]]
 name = "plc_service"
-version = "2024.10.1"
+version = "2024.10.2"
 dependencies = [
  "chrono",
  "clap",

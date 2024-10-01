@@ -1,6 +1,6 @@
 use tonic;
 
-use plc_proto::plc::{ControlPlcRequest, ControlPlcResponse, ControlPlcVersion};
+use plc_proto::plc::{self, ControlPlcRequest, ControlPlcResponse, ControlPlcVersion};
 
 use super::MyPlcService;
 
@@ -12,6 +12,10 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<ControlPlcResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = ControlPlcResponse::default();
+        resp.version = Some(plc::control_plc_response::Version {
+            request: req.version,
+            required: ControlPlcVersion::ControlPlc20240927.into(),
+        });
 
         // validate request version with required
         resp.status = Self::validate_version(

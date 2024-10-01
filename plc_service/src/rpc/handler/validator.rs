@@ -19,6 +19,10 @@ impl MyPlcService {
             });
         }
 
-        return None;
+        return Some(ResponseStatus {
+            code: ResponseCode::Ok.into(),
+            name: ResponseCode::Ok.as_str_name().to_string(),
+            message: String::new(),
+        });
     }
 }

@@ -1,6 +1,8 @@
 use tonic;
 
-use plc_proto::plc::{self, LeaveAdapterRequest, LeaveAdapterResponse, LeaveAdapterVersion};
+use plc_proto::plc::{
+    self, leave_adapter_response, LeaveAdapterRequest, LeaveAdapterResponse, LeaveAdapterVersion,
+};
 
 use super::MyPlcService;
 
@@ -12,6 +14,10 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<LeaveAdapterResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = LeaveAdapterResponse::default();
+        resp.version = Some(leave_adapter_response::Version {
+            request: req.version,
+            required: LeaveAdapterVersion::LeaveAdapter20240930.into(),
+        });
 
         // validate request version with required
         resp.status = Self::validate_version(
@@ -25,7 +31,9 @@ impl MyPlcService {
             if self.store.leave_adapter(device_type).await {
                 resp.status = Some(plc::ResponseStatus {
                     code: plc::ResponseCode::ServiceStoreError.into(),
-                    name: plc::ResponseCode::ServiceStoreError.as_str_name().to_string(),
+                    name: plc::ResponseCode::ServiceStoreError
+                        .as_str_name()
+                        .to_string(),
                     message: String::new(),
                 });
             }

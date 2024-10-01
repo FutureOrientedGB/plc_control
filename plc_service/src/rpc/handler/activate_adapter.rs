@@ -14,6 +14,10 @@ impl MyPlcService {
     ) -> std::result::Result<tonic::Response<ActivateAdapterResponse>, tonic::Status> {
         let req = request.into_inner();
         let mut resp = ActivateAdapterResponse::default();
+        resp.version = Some(plc::activate_adapter_response::Version {
+            request: req.version,
+            required: ActivateAdapterVersion::ActivateAdapter20240930.into(),
+        });
 
         // validate request version with required
         resp.status = Self::validate_version(
