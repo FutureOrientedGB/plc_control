@@ -1,6 +1,8 @@
 use tonic;
 
-use plc_proto::plc::{upsert_plc_device_response, UpsertPlcDeviceRequest, UpsertPlcDeviceResponse, UpsertPlcVersion};
+use plc_proto::plc::{
+    self, upsert_plc_device_response, UpsertPlcDeviceRequest, UpsertPlcDeviceResponse, UpsertPlcVersion,
+};
 
 use super::MyPlcService;
 
@@ -23,6 +25,17 @@ impl MyPlcService {
             UpsertPlcVersion::UpsertPlc20240928.into(),
             std::any::type_name::<UpsertPlcVersion>(),
         );
+
+        // store adapter's info
+        if !self.store.upsert_device(&req).await {
+            resp.status = Some(plc::ResponseStatus {
+                code: plc::ResponseCode::ServiceStoreError.into(),
+                name: plc::ResponseCode::ServiceStoreError
+                    .as_str_name()
+                    .to_string(),
+                message: String::new(),
+            });
+        }
 
         return Ok(tonic::Response::new(resp));
     }

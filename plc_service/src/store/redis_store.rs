@@ -10,7 +10,7 @@ pub struct RedisStore {
 
     pub url: String,
 
-    // hash
+    // hash { device_id -> device }
     pub key_hash_devices: String,
 
     // hash { device_type_id -> tcp://rpc_host:rpc_port }
@@ -18,7 +18,7 @@ pub struct RedisStore {
     // hash { device_type_name -> device_type_id }
     pub key_hash_device_type_name: String,
     // zset { (device_type_id, ts) }
-    pub key_hash_device_type_heartbeat: String,
+    pub key_zset_device_type_heartbeat: String,
 }
 
 impl RedisStore {
@@ -29,7 +29,7 @@ impl RedisStore {
             key_hash_devices: conf.redis_key_hash_devices,
             key_hash_device_type_id: conf.redis_key_hash_device_type_id,
             key_hash_device_type_name: conf.redis_key_hash_device_type_name,
-            key_hash_device_type_heartbeat: conf.redis_key_hash_device_type_heartbeat,
+            key_zset_device_type_heartbeat: conf.redis_key_zset_device_type_heartbeat,
         }
     }
 

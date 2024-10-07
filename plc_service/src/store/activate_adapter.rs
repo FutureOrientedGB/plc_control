@@ -43,7 +43,7 @@ impl RedisStore {
                         )
                         .ignore()
                         .zadd(
-                            &self.key_hash_device_type_heartbeat,
+                            &self.key_zset_device_type_heartbeat,
                             format!("{}:{}", &device_type.name, device_type.id),
                             timestamp.to_string(),
                         )

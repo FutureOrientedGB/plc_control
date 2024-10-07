@@ -1,6 +1,6 @@
 [package]
 name = "plc_service"
-version = "2024.10.2"
+version = "2024.10.7"
 edition = "2021"
 
 [dependencies]
@@ -8,6 +8,9 @@ plc_log = { path = "../plc_log" }
 plc_proto = { path = "../plc_proto" }
 
 chrono = { version = "0.4.38" }
+
+futures = { version = "0.3.31" }
+futures-util = { version = "0.3.31" }
 
 prost = { version = "0.13.3" }
 prost-types = { version = "0.13.3" }

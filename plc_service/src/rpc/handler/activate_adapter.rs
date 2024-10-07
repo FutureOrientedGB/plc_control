@@ -27,7 +27,7 @@ impl MyPlcService {
         );
 
         // store adapter's info
-        if self.store.activate_adapter(&req).await {
+        if !self.store.activate_adapter(&req).await {
             resp.status = Some(plc::ResponseStatus {
                 code: plc::ResponseCode::ServiceStoreError.into(),
                 name: plc::ResponseCode::ServiceStoreError

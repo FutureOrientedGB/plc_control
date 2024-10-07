@@ -26,7 +26,7 @@ impl RedisStore {
                         .hget(&self.key_hash_device_type_id, device_type.id)
                         .hget(&self.key_hash_device_type_name, &device_type.name)
                         .zscore(
-                            &self.key_hash_device_type_heartbeat,
+                            &self.key_zset_device_type_heartbeat,
                             format!("{}:{}", &device_type.name, device_type.id),
                         )
                         .query_async(&mut connection)

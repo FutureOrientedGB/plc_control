@@ -4,7 +4,7 @@ package plc;
 
 
 message EnumType {
-    uint32 address = 1;
+    repeated uint32 address = 1;
     string name = 2;
     uint32 value = 3;
     repeated string names = 4;
@@ -13,7 +13,7 @@ message EnumType {
 
 
 message Uint32Type {
-    uint32 address = 1;
+    repeated uint32 address = 1;
     string name = 2;
     uint32 val = 3;
     uint32 max = 4;
@@ -22,7 +22,7 @@ message Uint32Type {
 
 
 message Uint64Type {
-    uint32 address = 1;
+    repeated uint32 address = 1;
     string name = 2;
     uint64 val = 3;
     uint64 max = 4;
@@ -31,7 +31,7 @@ message Uint64Type {
 
 
 message Float32Type {
-    uint32 address = 1;
+    repeated uint32 address = 1;
     string name = 2;
     float val = 3;
     float max = 4;
@@ -40,7 +40,7 @@ message Float32Type {
 
 
 message Float64Type {
-    uint32 address = 1;
+    repeated uint32 address = 1;
     string name = 2;
     double val = 3;
     double max = 4;

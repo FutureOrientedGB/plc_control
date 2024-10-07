@@ -29,7 +29,7 @@ impl RedisStore {
                         - 60.0;
 
                     let expired_members: redis::RedisResult<Vec<String>> = connection
-                        .zrevrangebyscore(&self.key_hash_device_type_heartbeat, timestamp, 0.0)
+                        .zrevrangebyscore(&self.key_zset_device_type_heartbeat, timestamp, 0.0)
                         .await;
 
                     let mut expired = 0;
@@ -50,7 +50,7 @@ impl RedisStore {
                     }
                     if expired > 0 {
                         pipe.zrembyscore(
-                            &self.key_hash_device_type_heartbeat,
+                            &self.key_zset_device_type_heartbeat,
                             0.0,
                             timestamp.to_string(),
                         )

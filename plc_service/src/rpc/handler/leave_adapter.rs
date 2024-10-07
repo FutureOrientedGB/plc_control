@@ -28,7 +28,7 @@ impl MyPlcService {
 
         // clear adapter's info
         if let Some(device_type) = req.r#type {
-            if self.store.leave_adapter(device_type).await {
+            if !self.store.leave_adapter(device_type).await {
                 resp.status = Some(plc::ResponseStatus {
                     code: plc::ResponseCode::ServiceStoreError.into(),
                     name: plc::ResponseCode::ServiceStoreError

@@ -29,7 +29,7 @@ impl RedisStore {
                         .hdel(&self.key_hash_device_type_name, &device_type.name)
                         .ignore()
                         .zrem(
-                            &self.key_hash_device_type_heartbeat,
+                            &self.key_zset_device_type_heartbeat,
                             format!("{}:{}", &device_type.name, device_type.id),
                         )
                         .ignore()

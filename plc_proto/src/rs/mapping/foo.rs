@@ -101,7 +101,7 @@ impl plc::FooTypePlcSchema {
             is_adapter_activated: activated,
             lane_indicator: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<LaneIndicatorStatus>().to_string(),
                     value: LaneIndicatorStatus::Begin as u32,
                     names: LaneIndicatorStatus::iter()
@@ -127,7 +127,7 @@ impl plc::FooTypePlcSchema {
             }],
             traffic_light: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<TrafficLightStatus>().to_string(),
                     value: TrafficLightStatus::Begin as u32,
                     names: TrafficLightStatus::iter()
@@ -153,7 +153,7 @@ impl plc::FooTypePlcSchema {
             }],
             blower: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<BlowerStatus>().to_string(),
                     value: BlowerStatus::Begin as u32,
                     names: BlowerStatus::iter()
@@ -179,7 +179,7 @@ impl plc::FooTypePlcSchema {
             }],
             rolling_door: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<RollingDoorStatus>().to_string(),
                     value: RollingDoorStatus::Begin as u32,
                     names: RollingDoorStatus::iter()
@@ -205,7 +205,7 @@ impl plc::FooTypePlcSchema {
             }],
             light: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<LightStatus>().to_string(),
                     value: LightStatus::Begin as u32,
                     names: LightStatus::iter()
@@ -231,7 +231,7 @@ impl plc::FooTypePlcSchema {
             }],
             water_pump: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<WaterPumpStatus>().to_string(),
                     value: WaterPumpStatus::Begin as u32,
                     names: WaterPumpStatus::iter()
@@ -257,7 +257,7 @@ impl plc::FooTypePlcSchema {
             }],
             wind_direction: vec![plc::FooTypePlcStatus {
                 status: Some(plc::EnumType {
-                    address: 0,
+                    address: vec![],
                     name: std::any::type_name::<WindDirections>().to_string(),
                     value: WindDirections::Begin as u32,
                     names: WindDirections::iter()
@@ -282,49 +282,49 @@ impl plc::FooTypePlcSchema {
                 ..Default::default()
             }],
             co: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("co"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             vi: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("vi"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             no2: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("no2"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             wind_speed: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("wind_speed"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             illuminance: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("illuminance"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             light_intensity: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("light_intensity"),
                 val: 0,
                 max: 10000,
                 min: 0,
             }],
             liquid_level: vec![plc::Uint32Type {
-                address: 0,
+                address: vec![],
                 name: String::from("liquid_level"),
                 val: 0,
                 max: 10000,
