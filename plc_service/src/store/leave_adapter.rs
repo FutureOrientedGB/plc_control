@@ -24,17 +24,14 @@ impl RedisStore {
                 }
                 Ok(mut connection) => {
                     match redis::pipe()
-                        .cmd("HDEL")
-                        .arg(&self.key_hash_device_type_id)
-                        .arg(device_type.id)
+                        .hdel(&self.key_hash_device_type_id, device_type.id)
                         .ignore()
-                        .cmd("HDEL")
-                        .arg(&self.key_hash_device_type_name)
-                        .arg(&device_type.name)
+                        .hdel(&self.key_hash_device_type_name, &device_type.name)
                         .ignore()
-                        .cmd("ZREM")
-                        .arg(&self.key_hash_device_type_heartbeat)
-                        .arg(format!("{}:{}", &device_type.name, device_type.id))
+                        .zrem(
+                            &self.key_hash_device_type_heartbeat,
+                            format!("{}:{}", &device_type.name, device_type.id),
+                        )
                         .ignore()
                         .query_async(&mut connection)
                         .await

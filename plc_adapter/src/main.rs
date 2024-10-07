@@ -90,12 +90,14 @@ async fn run_background_tasks(
         };
 
         let mut times: u16 = 0;
+        let mut seconds = 0;
         loop {
             tokio::select! {
                 _ = quit_rx.recv() => {
                     break;
                 },
-                _ = tokio::time::sleep(tokio::time::Duration::from_secs(10)) => {
+                _ = tokio::time::sleep(tokio::time::Duration::from_secs(seconds)) => {
+                    seconds = 10;
                     if times % 60 == 0 {
                         tracing::info!(message = "activate_adapter", func = function_name!(), end = false, times = times);
                     }

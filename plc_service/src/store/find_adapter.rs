@@ -1,10 +1,9 @@
-
 use tracing;
 
 use stdext::function_name;
 
-use plc_proto::plc;
 use super::RedisStore;
+use plc_proto::plc;
 
 impl RedisStore {
     pub async fn find_adapter(&self, device_type: plc::DeviceType) -> String {
@@ -24,18 +23,12 @@ impl RedisStore {
                 }
                 Ok(mut connection) => {
                     let result: redis::RedisResult<Vec<Option<String>>> = redis::pipe()
-                        .cmd("HGET")
-                        .arg(&self.key_hash_device_type_id)
-                        .arg(device_type.id)
-                        .ignore()
-                        .cmd("HGET")
-                        .arg(&self.key_hash_device_type_name)
-                        .arg(&device_type.name)
-                        .ignore()
-                        .cmd("ZSCORE")
-                        .arg(&self.key_hash_device_type_heartbeat)
-                        .arg(format!("{}\t{}", &device_type.name, device_type.id))
-                        .ignore()
+                        .hget(&self.key_hash_device_type_id, device_type.id)
+                        .hget(&self.key_hash_device_type_name, &device_type.name)
+                        .zscore(
+                            &self.key_hash_device_type_heartbeat,
+                            format!("{}:{}", &device_type.name, device_type.id),
+                        )
                         .query_async(&mut connection)
                         .await;
 
@@ -84,7 +77,7 @@ impl RedisStore {
                                                                         std::time::UNIX_EPOCH,
                                                                     )
                                                                     .unwrap()
-                                                                    .as_secs();
+                                                                    .as_secs_f64();
                                                             match last_heartbeat {
                                                                 None => {
                                                                     errors.push(
@@ -92,12 +85,12 @@ impl RedisStore {
                                                                     );
                                                                 }
                                                                 Some(heartbeat) => {
-                                                                    match heartbeat.parse::<u64>() {
+                                                                    match heartbeat.parse::<f64>() {
                                                                         Err(_) => {
                                                                             errors.push("adapter device type id heartbeat error");
                                                                         }
                                                                         Ok(beat) => {
-                                                                            if timestamp - beat > 60
+                                                                            if timestamp - beat > 60.0
                                                                             {
                                                                                 errors.push("adapter device type id expired");
                                                                             } else {
@@ -116,7 +109,7 @@ impl RedisStore {
                                     }
                                 }
 
-                                if errors.is_empty() {
+                                if !errors.is_empty() {
                                     tracing::error!(
                                         message = errors.join(", "),
                                         rpc_addr = addr_log,

@@ -53,6 +53,7 @@ async fn run_background_tasks(
     let (quit_tx, mut quit_rx) = tokio::sync::broadcast::channel(1);
     let handle = tokio::spawn(async move {
         let mut times: u16 = 0;
+        let mut seconds = 0;
         let mut store = store::RedisStore::new(conf);
         let _ = store.open();
         loop {
@@ -60,7 +61,8 @@ async fn run_background_tasks(
                 _ = quit_rx.recv() => {
                     break;
                 },
-                _ = tokio::time::sleep(tokio::time::Duration::from_secs(30)) => {
+                _ = tokio::time::sleep(tokio::time::Duration::from_secs(seconds)) => {
+                    seconds = 30;
                     if times % 60 == 0 {
                         tracing::info!(message = "remove_expired_adapter", func = function_name!(), end = false, times = times);
                     }

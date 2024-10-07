@@ -30,20 +30,23 @@ impl RedisStore {
                         .unwrap()
                         .as_secs_f64();
                     match redis::pipe()
-                        .cmd("HSET")
-                        .arg(&self.key_hash_device_type_id)
-                        .arg(device_type.id)
-                        .arg(format!("tcp://{}:{}", request.rpc_host, request.rpc_port))
+                        .hset(
+                            &self.key_hash_device_type_id,
+                            device_type.id,
+                            format!("tcp://{}:{}", request.rpc_host, request.rpc_port),
+                        )
                         .ignore()
-                        .cmd("HSET")
-                        .arg(&self.key_hash_device_type_name)
-                        .arg(&device_type.name)
-                        .arg(device_type.id)
+                        .hset(
+                            &self.key_hash_device_type_name,
+                            &device_type.name,
+                            device_type.id,
+                        )
                         .ignore()
-                        .cmd("ZADD")
-                        .arg(&self.key_hash_device_type_heartbeat)
-                        .arg(timestamp.to_string())
-                        .arg(format!("{}:{}", &device_type.name, device_type.id))
+                        .zadd(
+                            &self.key_hash_device_type_heartbeat,
+                            format!("{}:{}", &device_type.name, device_type.id),
+                            timestamp.to_string(),
+                        )
                         .ignore()
                         .query_async(&mut connection)
                         .await

@@ -25,7 +25,8 @@ impl RedisStore {
                     let timestamp = std::time::SystemTime::now()
                         .duration_since(std::time::UNIX_EPOCH)
                         .unwrap()
-                        .as_secs_f64() - 60.0;
+                        .as_secs_f64()
+                        - 60.0;
 
                     let expired_members: redis::RedisResult<Vec<String>> = connection
                         .zrevrangebyscore(&self.key_hash_device_type_heartbeat, timestamp, 0.0)
@@ -42,23 +43,18 @@ impl RedisStore {
                                 .collect::<Vec<String>>()
                                 .as_slice()
                             {
-                                pipe.cmd("HDEL")
-                                    .arg(&self.key_hash_device_type_id)
-                                    .arg(&id)
-                                    .ignore();
-                                pipe.cmd("HDEL")
-                                    .arg(&self.key_hash_device_type_name)
-                                    .arg(&name)
-                                    .ignore();
+                                pipe.hdel(&self.key_hash_device_type_id, &id).ignore();
+                                pipe.hdel(&self.key_hash_device_type_name, &name).ignore();
                             }
                         }
                     }
                     if expired > 0 {
-                        pipe.cmd("ZREMRANGEBYSCORE")
-                            .arg(&self.key_hash_device_type_heartbeat)
-                            .arg(0)
-                            .arg((timestamp).to_string())
-                            .ignore();
+                        pipe.zrembyscore(
+                            &self.key_hash_device_type_heartbeat,
+                            0.0,
+                            timestamp.to_string(),
+                        )
+                        .ignore();
                         let _: redis::RedisResult<()> = pipe.query_async(&mut connection).await;
 
                         tracing::info!(func = function_name!(), expired = expired);
